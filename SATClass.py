@@ -1,6 +1,7 @@
 ﻿'''
     Desc: Defines the classes used by the SAT solver for DPLL algorithm
 '''
+from sympy import *
 '''
     File Class:
         fileN: Name of the file
@@ -27,34 +28,35 @@ class Node:
         self.clause = clause
 
 def dpll(clauses, assignment):
-    clauses = unitPropagation(clauses, assignment)
+    clauses, assignment, isConflict = unitPropagation(clauses, assignment)
 
-    '''
-    # Local contradiction?
-    if has_conflict(clauses):
+    # Local contradiction
+    if isConflict:
         return False, None   # conflict -> backtrack
 
-    # Fully satisfied?
-    if all_clauses_satisfied(clauses):
+    # Fully satisfied
+    if not clauses:
         return True, assignment
 
-    literal = pick_unassigned_literal(clauses)
+    literal = pickUnassignedLiteral(clauses, assignment)
 
     # Try literal = True
-    result, solution = dpll(simplify(clauses, literal), {**assignment, literal: True})
+    result, solution = dpll(to_cnf(clauses), {**assignment, literal: True})
     if result:
         return True, solution
 
     # If first branch failed (conflict in every subpath), try False
-    result, solution = dpll(simplify(clauses, -literal), {**assignment, literal: False})
+    result, solution = dpll(to_cnf(clauses), {**assignment, literal: False})
     if result:
         return True, solution
 
     # Both branches failed (conflicts everywhere)
     return False, None   # GLOBAL unsatisfiability
-    '''
+    
+#def simplify(clauses, literal):
+    
 
-def get_first_unassigned_var(clauses, assignment):
+def pickUnassignedLiteral(clauses, assignment):
     for clause in clauses:
         for lit in clause:
             var = abs(lit)
