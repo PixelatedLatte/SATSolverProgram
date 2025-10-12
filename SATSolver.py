@@ -4,6 +4,7 @@ Description: A simple SAT solver using the DPLL algorithm, and more
 import copy
 import glob
 import os
+import random
 from stringprep import in_table_a1
 from SATClass import *
 
@@ -86,7 +87,7 @@ def ClausesSatisfied(formula, assignment):
         return -1
     clausesatisfied = 0;
     clausenum = -1
-    print(f"Assignment is {assignment}")
+    #print(f"Assignment is {assignment}")
     for clause in formula.clausesRaw:
         clausenum += 1
         varnum = -1
@@ -102,24 +103,48 @@ def ClausesSatisfied(formula, assignment):
                 varsatisfied = 1
         if (varsatisfied >= 1):
             clausesatisfied += 1
-            print(f"Clause {clausenum} satisfied")
+            #print(f"Clause {clausenum} satisfied")
         else:
-            print(f"Clause {clausenum} not satisfied")
+            pass
+            #print(f"Clause {clausenum} not satisfied")
 
     print(f"Clauses satisfied: {clausesatisfied} out of {formula.numClauses}")
     return clausesatisfied
             
 
-def LocalSearch(formula):
-    # Initialize assignment: "0" for each variable
+def LocalSearch(formula, maxflips):
+    # Initialize assignment: "1 or 0" for each variable
     assignment = ""
+    satisfiedlist = []
     for i in range(formula.numClauses):
-        assignment += "0"
+        if random.choice([True, False]) == True:
+            assignment += "1"
+        else: 
+            assignment += "0"
+
 
     # Evaluate initial assignment
-    numsatisfied = ClausesSatisfied(formula, assignment)
-    print(f"Initial satisfied clauses: {numsatisfied}")
+    for i in range(maxflips):
+        for j in range(len(assignment)):
+            if (assignment[j] == "0"):
+                assignmenttemp = assignment[:j] + "1" + assignment[(j+1):]
+            else:
+                assignmenttemp = assignment[:j] + "0" + assignment[(j+1):]
+                numsatisfied = ClausesSatisfied(formula, assignmenttemp)
+                satisfiedlist.append(numsatisfied)
+                print(f"Initial satisfied clauses: {numsatisfied}")
+        maxsatisfied = max(satisfiedlist)
+        maxindex = satisfiedlist.index(maxsatisfied)
+        print(f"Max satisfied clauses: {maxsatisfied} at index {maxindex}")
+            
+        if (assignment[maxindex] == "0"):
+            assignment = assignment[:maxindex] + "1" + assignment[(maxindex+1):]
+        else:
+            assignment = assignment[:maxindex] + "0" + assignment[(maxindex+1):]
 
+    finalsatisfied = ClausesSatisfied(formula, assignment)
+    print(f"\n\nFINAL ASSIGNMENT: {finalsatisfied} clauses satisfied")
+    print(f"Total Clauses: {formula.numClauses}")
     return assignment
      
 
@@ -160,4 +185,4 @@ print(
 )
 
 
-LocalSearch(hard_formulas[7])
+LocalSearch(hard_formulas[7], 30)
