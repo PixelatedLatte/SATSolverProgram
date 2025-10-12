@@ -67,5 +67,5 @@ hardFormulas = read_cnf_files(hardfiles)
 print(f"Hard formula 0: {hardFormulas[7].clausesRaw}\n\n")
 
 hardFormulas[7].clausesRaw, assignments, isConflict = unitPropagation(hardFormulas[7].clausesRaw, assignments)
-
+#A change so I can commit
 print(f"After unit propagation: {hardFormulas[7].clausesRaw} \n\nand assignments: {assignments}, conflict: {isConflict}")
