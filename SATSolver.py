@@ -61,7 +61,6 @@ def read_cnf_files(file_list):
 
     return file_objects
 
-
 def create_negation(formula):
     formula.clausesNegation = copy.deepcopy(formula.clausesRaw)
     for clause in formula.clausesNegation:
@@ -158,6 +157,6 @@ print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
     f"Assignments: {assignments}, Conflict: {is_conflict}"
 )
-
+'''
 
 LocalSearch(hard_formulas[7])

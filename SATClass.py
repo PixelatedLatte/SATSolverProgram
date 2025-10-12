@@ -53,7 +53,15 @@ def dpll(clauses, assignment):
     # Both branches failed (conflicts everywhere)
     return False, None   # GLOBAL unsatisfiability
     
-#def simplify(clauses, literal):
+#Simplify all clauses in formula by removing clauses satisfied by literals
+def simplify(clauses, literal):
+    #given an assigned literal, remove all clauses in the formula that are satisfied by that literal
+
+    #If the literal is positive, remove all clauses containing that literal
+
+    #Else if the literal is negative, 
+    
+    return 0
     
 
 def pickUnassignedLiteral(clauses, assignment):
