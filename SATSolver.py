@@ -80,6 +80,48 @@ def create_negation(formula):
             clause[i] = abs(clause[i])
         #print(f"New clause: {clause}")
 
+def ClausesSatisfied(formula, assignment):
+    if (len(assignment) != formula.numClauses):
+        print("Error: Assignment length does not match number of clauses.")
+        return -1
+    clausesatisfied = 0;
+    clausenum = -1
+    print(f"Assignment is {assignment}")
+    for clause in formula.clausesRaw:
+        clausenum += 1
+        varnum = -1
+        varsatisfied = 0
+        for var in clause:
+            varnum += 1
+            assignmentsign = assignment[var-1]
+            clausesign = formula.clausesNegation[clausenum][varnum]
+            #print(f"Var: {var}, Assignmentsign: {assignmentsign}, Clausesign: {clausesign}")
+            assignmentsign = int(assignmentsign)
+            if (assignmentsign == clausesign):
+                #print("Variable Satisfied")
+                varsatisfied = 1
+        if (varsatisfied >= 1):
+            clausesatisfied += 1
+            print(f"Clause {clausenum} satisfied")
+        else:
+            print(f"Clause {clausenum} not satisfied")
+
+    print(f"Clauses satisfied: {clausesatisfied} out of {formula.numClauses}")
+    return clausesatisfied
+            
+
+def LocalSearch(formula):
+    # Initialize assignment: "0" for each variable
+    assignment = ""
+    for i in range(formula.numClauses):
+        assignment += "0"
+
+    # Evaluate initial assignment
+    numsatisfied = ClausesSatisfied(formula, assignment)
+    print(f"Initial satisfied clauses: {numsatisfied}")
+
+    return assignment
+     
 
 assignments = {}
 easy_files = []
@@ -105,7 +147,7 @@ for formula in hard_formulas:
     create_negation(formula)
 
 # Example: Print a specific formula’s clauses
-print(f"Hard formula 7:\n {hard_formulas[7].clausesRaw}\n")
+print(f"Hard formula 7: {hard_formulas[7].fileN}\n {hard_formulas[7].clausesRaw}\n")
 
 # Apply unit propagation
 hard_formulas[7].clausesRaw, assignments, is_conflict = unitPropagation(
@@ -116,3 +158,6 @@ print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
     f"Assignments: {assignments}, Conflict: {is_conflict}"
 )
+
+
+LocalSearch(hard_formulas[7])
