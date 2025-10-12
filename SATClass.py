@@ -22,10 +22,9 @@ Parent: Parent node of current
 value: Individual variable of current node
 '''
 class Node:
-    def init(self, parent, clause, assignment):
+    def init(self, parent, clause):
         self.parent = parent
         self.clause = clause
-        self.assingment = assignment
 
 def dpll(clauses, assignment):
     clauses = unitPropagation(clauses, assignment)
@@ -54,6 +53,14 @@ def dpll(clauses, assignment):
     # Both branches failed (conflicts everywhere)
     return False, None   # GLOBAL unsatisfiability
     '''
+
+def get_first_unassigned_var(clauses, assignment):
+    for clause in clauses:
+        for lit in clause:
+            var = abs(lit)
+            if var not in assignment:
+                return var
+    return None  # All variables assigned
 
 def unitPropagation(clauses, assignment):
     changed = True

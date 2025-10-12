@@ -76,7 +76,10 @@ for i in range(len(hardFormulas)):
 '''
 
 
-print(f"Hard formula 0: {hardFormulas[7].clausesRaw}\n\n")
+print(f"Hard formula 7: {hardFormulas[7].clausesRaw}\n\n")
+assignments[get_first_unassigned_var(hardFormulas[7].clausesRaw, assignments)] = True
+print(f"First unassigned variable in hard formula 7: {assignments}\n\n")
+
 
 hardFormulas[7].clausesRaw, assignments, isConflict = unitPropagation(hardFormulas[7].clausesRaw, assignments)
 #A change so I can commit
