@@ -14,6 +14,7 @@ def read_cnf_files(filearray):
     # Variable to store all files objects and return them
     fileObjects = []
     for file in filearray:
+        clauses = [] #resets clauses
         with open(file, "r") as f:
             for line in f:
                 line = line.strip()
@@ -41,8 +42,10 @@ def read_cnf_files(filearray):
         fileInfo = File(file, len(clauses), clauses, clauseNegation)
         fileObjects.append(fileInfo)
 
-        print(f"Loaded {len(clauses)} clauses with {num_vars} variables.")
-        print("Example clause:", clauses[0])
+        print(f"File: {file}, legnth is {len(clauses)} clauses.")
+
+        #print(f"Loaded {len(clauses)} clauses with {num_vars} variables.")
+        #print("Example clause:", clauses[0])
     return fileObjects
 
 import glob
@@ -63,6 +66,15 @@ hardfiles = load_cnf_files(hard_folder_path, hardfiles)
 #easy and hard formulas are File class objects
 easyFormulas = read_cnf_files(easyfiles)
 hardFormulas = read_cnf_files(hardfiles)
+
+''' prints out all of the clauses in the easy and hard formulas
+for i in range(len(easyFormulas)):
+    print(f"Easy formula {i}: {easyFormulas[i].clausesRaw}\n\n")
+
+for i in range(len(hardFormulas)):
+    print(f"Hard formula {i}: {hardFormulas[i].clausesRaw}\n\n")
+'''
+
 
 print(f"Hard formula 0: {hardFormulas[7].clausesRaw}\n\n")
 
