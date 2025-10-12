@@ -11,6 +11,8 @@ def load_cnf_files(folder_path, filearray):
     return filearray
 
 def read_cnf_files(filearray):
+    # Variable to store all files objects and return them
+    fileObjects = []
     for file in filearray:
         with open(file, "r") as f:
             for line in f:
@@ -32,13 +34,22 @@ def read_cnf_files(filearray):
                 # Stop after reading all clauses listed in the header
                 if len(clauses) >= num_clauses:
                     break
+        #Clauses negation for File class
+        clauseNegation = [[-lit for lit in clause] for clause in clauses]
+
+        #Build File object and input into fileObjects array
+        fileInfo = File(file, len(clauses), clauses, clauseNegation)
+        fileObjects.append(fileInfo)
+
         print(f"Loaded {len(clauses)} clauses with {num_vars} variables.")
         print("Example clause:", clauses[0])
-
+    return fileObjects
 
 import glob
 import os
+from SATClass import *
 
+assignments = {}
 easyfiles = []
 hardfiles = []
 clauses = []
@@ -49,5 +60,12 @@ hard_folder_path = r'HARD CNF Formulas'
 easyfiles = load_cnf_files(easy_folder_path, easyfiles)
 hardfiles = load_cnf_files(hard_folder_path, hardfiles)
 
-read_cnf_files(easyfiles)
-read_cnf_files(hardfiles)
+#easy and hard formulas are File class objects
+easyFormulas = read_cnf_files(easyfiles)
+hardFormulas = read_cnf_files(hardfiles)
+
+print(f"Hard formula 0: {hardFormulas[7].clausesRaw}\n\n")
+
+hardFormulas[7].clausesRaw, assignments, isConflict = unitPropagation(hardFormulas[7].clausesRaw, assignments)
+
+print(f"After unit propagation: {hardFormulas[7].clausesRaw} \n\nand assignments: {assignments}, conflict: {isConflict}")
