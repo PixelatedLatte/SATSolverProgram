@@ -175,10 +175,10 @@ for formula in hard_formulas:
 print(f"Hard formula 7: {hard_formulas[7].fileN}\n {hard_formulas[7].clausesRaw}\n")
 
 # Apply unit propagation
-hard_formulas[7].clausesRaw, assignments, is_conflict = unitPropagation(
-    hard_formulas[7].clausesRaw, assignments
+easy_formulas[0].clausesRaw, assignments, is_conflict = dpll(
+    easy_formulas[0].clausesRaw, assignments
 )
-
+'''
 print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
     f"Assignments: {assignments}, Conflict: {is_conflict}"
