@@ -32,38 +32,46 @@ def dpll(clauses, assignment):
 
     # Local contradiction
     if isConflict:
+        print("Did not find Solution...Conflict in all branches")
         return False, None   # conflict -> backtrack
 
     # Fully satisfied
     if not clauses:
+        print("Found solution!!!")
         return True, assignment
-
+    
     literal = pickUnassignedLiteral(clauses, assignment)
 
     # Try literal = True
-    result, solution = dpll(to_cnf(clauses), {**assignment, literal: True})
+    result, solution = dpll(simplify(clauses, literal), {**assignment, literal: True})
     if result:
+        print("Found solution!!!")
         return True, solution
 
     # If first branch failed (conflict in every subpath), try False
-    result, solution = dpll(to_cnf(clauses), {**assignment, literal: False})
+    result, solution = dpll(simplify(clauses, literal), {**assignment, literal: False})
     if result:
+        print("Found solution!!!")
         return True, solution
 
     # Both branches failed (conflicts everywhere)
+    print("Did not find Solution...Conflict in all branches")
     return False, None   # GLOBAL unsatisfiability
     
 #Simplify all clauses in formula by removing clauses satisfied by literals
 def simplify(clauses, literal):
     #given an assigned literal, remove all clauses in the formula that are satisfied by that literal
+    #if literal is None:
+     #   return clauses
 
     #If the literal is positive, remove all clauses containing that literal
-
-    #Else if the literal is negative, 
+    if literal > 0:
+        clauses = [clause for clause in clauses if literal not in clause]
+    elif literal < 0:
+        clauses = [[lit for lit in clause if lit >= 0] for clause in clauses]
     
-    return 0
+    return clauses
     
-
 def pickUnassignedLiteral(clauses, assignment):
     for clause in clauses:
         for lit in clause:
@@ -118,17 +126,8 @@ def unitPropagation(clauses, assignment):
         changed = True
 
         # Step 4: Simplify the formula
-        new_clauses = []
-        for clause in clauses:
-            # Clause satisfied — skip
-            if unit_clause_literal in clause:
-                continue
-            # Remove falsified literal from other clauses
-            if -unit_clause_literal in clause:
-                new_clause = [lit for lit in clause if lit != -unit_clause_literal]
-                new_clauses.append(new_clause)
-            else:
-                new_clauses.append(clause)
+        new_clauses = simplify(clauses, unit_clause_literal)
+        
         clauses = new_clauses
 
     return clauses, assignment, False

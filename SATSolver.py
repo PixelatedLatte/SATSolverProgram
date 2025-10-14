@@ -173,10 +173,13 @@ for formula in hard_formulas:
 # Example: Print a specific formula’s clauses
 print(f"Hard formula 7: {hard_formulas[7].fileN}\n {hard_formulas[7].clausesRaw}\n")
 
+assignments[pickUnassignedLiteral(hard_formulas[7].clausesRaw, assignments)] = True
 # Apply unit propagation
-easy_formulas[0].clausesRaw, assignments, is_conflict = dpll(
-    easy_formulas[0].clausesRaw, assignments
+hard_formulas[7].clausesRaw, assignments = dpll(
+    hard_formulas[7].clausesRaw, assignments
 )
+
+
 '''
 print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
@@ -184,4 +187,4 @@ print(
 )
 '''
 
-LocalSearch(hard_formulas[7], 30)
+#LocalSearch(hard_formulas[7], 30)
