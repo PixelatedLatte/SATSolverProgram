@@ -23,16 +23,17 @@ Parent: Parent node of current
 value: Individual variable of current node
 '''
 class Node:
-    def init(self, parent, clause):
+    def __init__(self, parent, clauses, assignment):
         self.parent = parent
-        self.clause = clause
-
+        self.clauses = clauses
+        self.assignment = assignment
+'''
 def dpll(clauses, assignment):
     clauses, assignment, isConflict = unitPropagation(clauses, assignment)
 
     # Local contradiction
     if isConflict:
-        print("Did not find Solution...Conflict in all branches")
+        print("Did not find Solution...Conflict in this branch")
         return False, None   # conflict -> backtrack
 
     # Fully satisfied
@@ -57,12 +58,47 @@ def dpll(clauses, assignment):
     # Both branches failed (conflicts everywhere)
     print("Did not find Solution...Conflict in all branches")
     return False, None   # GLOBAL unsatisfiability
-    
+'''
+# dpll Algorithm using a stack instead of recursion, too many resources used when recurring too much
+def dpll(clauses, assignment):
+    stack = []
+    root = Node(None, clauses, assignment)
+    stack.append(root)
+
+    while stack:
+        node = stack.pop()
+        clauses, assignment = node.clauses, node.assignment
+
+        # Unit propagation
+        clauses, assignment, isConflict = unitPropagation(clauses, assignment)
+        if isConflict:
+            continue  # Conflict, backtrack
+
+        if not clauses:
+            print("Found solution!!!")
+            return True, assignment  # Solution found
+
+        literal = pickUnassignedLiteral(clauses, assignment)
+        if literal is None:
+            continue  # No unassigned literals, backtrack
+
+        # Try literal = False first, so True is explored first
+        new_assignment_false = assignment.copy()
+        new_assignment_false[literal] = False
+        stack.append(Node(node, simplify(clauses, -literal), new_assignment_false))
+
+        new_assignment_true = assignment.copy()
+        new_assignment_true[literal] = True
+        stack.append(Node(node, simplify(clauses, literal), new_assignment_true))
+
+    print("Did not find Solution...Conflict in all branches")
+    return False, None  # GLOBAL unsatisfiability
+
 #Simplify all clauses in formula by removing clauses satisfied by literals
 def simplify(clauses, literal):
     #given an assigned literal, remove all clauses in the formula that are satisfied by that literal
-    #if literal is None:
-     #   return clauses
+    if literal is None:
+        return clauses
 
     #If the literal is positive, remove all clauses containing that literal
     if literal > 0:
@@ -81,53 +117,37 @@ def pickUnassignedLiteral(clauses, assignment):
     return None  # All variables assigned
 
 def unitPropagation(clauses, assignment):
-    changed = True
-
-    while changed:
-        changed = False
+    assignment = assignment.copy()  # Avoid mutating input assignment
+    while True:
         unit_clause_literal = None
 
         # Step 1: Find a unit clause
         for clause in clauses:
-            # Track clause satisfaction and remaining unassigned literals
-            unassigned_literals = []
-            clause_satisfied = False
-
-            for lit in clause:
-                var = abs(lit)
-                if var in assignment:
-                    # Clause satisfied if literal matches current assignment
-                    if (lit > 0 and assignment[var]) or (lit < 0 and not assignment[var]):
-                        clause_satisfied = True
-                        break
-                    # Otherwise, literal is false under current assignment
-                else:
-                    unassigned_literals.append(lit)
+            unassigned_literals = [lit for lit in clause if abs(lit) not in assignment]
+            clause_satisfied = any(
+                (lit > 0 and assignment.get(abs(lit), None) is True) or
+                (lit < 0 and assignment.get(abs(lit), None) is False)
+                for lit in clause if abs(lit) in assignment
+            )
 
             if clause_satisfied:
                 continue
 
-            # Clause contradicted: all literals false under current assignment
             if len(unassigned_literals) == 0:
                 return clauses, assignment, True  # conflict detected
 
-            # Unit clause found
             if len(unassigned_literals) == 1:
                 unit_clause_literal = unassigned_literals[0]
                 break
 
-        # Step 2: If no unit clauses remain, propagation is done
         if unit_clause_literal is None:
-            break
+            break  # No more unit clauses
 
         # Step 3: Apply the forced assignment
-        val = unit_clause_literal > 0
-        assignment[abs(unit_clause_literal)] = val
-        changed = True
+        assignment[abs(unit_clause_literal)] = unit_clause_literal > 0
+        assignment[abs(unit_clause_literal)] = unit_clause_literal > 0
 
         # Step 4: Simplify the formula
-        new_clauses = simplify(clauses, unit_clause_literal)
-        
-        clauses = new_clauses
+        clauses = simplify(clauses, unit_clause_literal)
 
     return clauses, assignment, False

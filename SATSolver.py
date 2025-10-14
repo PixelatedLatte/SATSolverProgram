@@ -162,24 +162,23 @@ hard_files = load_cnf_files(hard_folder_path, hard_files)
 # Read and parse CNF files into File class objects
 easy_formulas = read_cnf_files(easy_files)
 hard_formulas = read_cnf_files(hard_files)
-
+'''
 # Create negations of the formulas
 for formula in easy_formulas:
     create_negation(formula)
 
 for formula in hard_formulas:
     create_negation(formula)
-
+'''
 # Example: Print a specific formula’s clauses
-print(f"Hard formula 7: {hard_formulas[7].fileN}\n {hard_formulas[7].clausesRaw}\n")
+print(f"Easy formula 0: {easy_formulas[0].fileN}\n {easy_formulas[0].clausesRaw}\n")
 
-assignments[pickUnassignedLiteral(hard_formulas[7].clausesRaw, assignments)] = True
+assignments[pickUnassignedLiteral(easy_formulas[0].clausesRaw, assignments)] = True
 # Apply unit propagation
-hard_formulas[7].clausesRaw, assignments = dpll(
-    hard_formulas[7].clausesRaw, assignments
+easy_formulas[0].clausesRaw, assignments = dpll(
+    easy_formulas[0].clausesRaw, assignments
 )
-
-
+print(f"Assignments: {assignments}")
 '''
 print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
