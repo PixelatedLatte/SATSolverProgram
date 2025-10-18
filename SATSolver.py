@@ -5,8 +5,10 @@ import copy
 import glob
 import os
 import random
+from re import A
 from stringprep import in_table_a1
 from SATClass import *
+import SATClass
 
 def load_cnf_files(folder_path, file_list):
     """
@@ -80,72 +82,7 @@ def create_negation(formula):
             clause[i] = abs(clause[i])
         #print(f"New clause: {clause}")
 
-def ClausesSatisfied(formula, assignment):
-    if (len(assignment) != formula.numClauses):
-        print("Error: Assignment length does not match number of clauses.")
-        return -1
-    clausesatisfied = 0;
-    clausenum = -1
-    #print(f"Assignment is {assignment}")
-    for clause in formula.clausesRaw:
-        clausenum += 1
-        varnum = -1
-        varsatisfied = 0
-        for var in clause:
-            varnum += 1
-            assignmentsign = assignment[var-1]
-            clausesign = formula.clausesNegation[clausenum][varnum]
-            #print(f"Var: {var}, Assignmentsign: {assignmentsign}, Clausesign: {clausesign}")
-            assignmentsign = int(assignmentsign)
-            if (assignmentsign == clausesign):
-                #print("Variable Satisfied")
-                varsatisfied = 1
-        if (varsatisfied >= 1):
-            clausesatisfied += 1
-            #print(f"Clause {clausenum} satisfied")
-        else:
-            pass
-            #print(f"Clause {clausenum} not satisfied")
 
-    print(f"Clauses satisfied: {clausesatisfied} out of {formula.numClauses}")
-    return clausesatisfied
-            
-
-def LocalSearch(formula, maxflips):
-    # Initialize assignment: "1 or 0" for each variable
-    assignment = ""
-    satisfiedlist = []
-    for i in range(formula.numClauses):
-        if random.choice([True, False]) == True:
-            assignment += "1"
-        else: 
-            assignment += "0"
-
-
-    # Evaluate initial assignment
-    for i in range(maxflips):
-        for j in range(len(assignment)):
-            if (assignment[j] == "0"):
-                assignmenttemp = assignment[:j] + "1" + assignment[(j+1):]
-            else:
-                assignmenttemp = assignment[:j] + "0" + assignment[(j+1):]
-                numsatisfied = ClausesSatisfied(formula, assignmenttemp)
-                satisfiedlist.append(numsatisfied)
-                print(f"Initial satisfied clauses: {numsatisfied}")
-        maxsatisfied = max(satisfiedlist)
-        maxindex = satisfiedlist.index(maxsatisfied)
-        print(f"Max satisfied clauses: {maxsatisfied} at index {maxindex}")
-            
-        if (assignment[maxindex] == "0"):
-            assignment = assignment[:maxindex] + "1" + assignment[(maxindex+1):]
-        else:
-            assignment = assignment[:maxindex] + "0" + assignment[(maxindex+1):]
-
-    finalsatisfied = ClausesSatisfied(formula, assignment)
-    print(f"\n\nFINAL ASSIGNMENT: {finalsatisfied} clauses satisfied")
-    print(f"Total Clauses: {formula.numClauses}")
-    return assignment
-     
 
 assignments = {}
 easy_files = []
@@ -162,28 +99,34 @@ hard_files = load_cnf_files(hard_folder_path, hard_files)
 # Read and parse CNF files into File class objects
 easy_formulas = read_cnf_files(easy_files)
 hard_formulas = read_cnf_files(hard_files)
-'''
+
 # Create negations of the formulas
 for formula in easy_formulas:
     create_negation(formula)
 
 for formula in hard_formulas:
     create_negation(formula)
-'''
+
+
 # Example: Print a specific formula’s clauses
 print(f"Easy formula 0: {easy_formulas[0].fileN}\n {easy_formulas[0].clausesRaw}\n")
 
-assignments[pickUnassignedLiteral(easy_formulas[0].clausesRaw, assignments)] = True
+#assignments[pickUnassignedLiteral(easy_formulas[0].clausesRaw, assignments)] = True
 # Apply unit propagation
+'''
 easy_formulas[0].clausesRaw, assignments = dpll(
     easy_formulas[0].clausesRaw, assignments
 )
-print(f"Assignments: {assignments}")
+'''
+#print(f"Assignments: {assignments}")
 '''
 print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
     f"Assignments: {assignments}, Conflict: {is_conflict}"
 )
 '''
-
-#LocalSearch(hard_formulas[7], 30)
+bit_flips = 30
+population_size = 10
+generations = 30
+SATClass.LocalSearch(hard_formulas[7], bit_flips)
+SATClass.GeneticAlgorithm(hard_formulas[7], population_size, generations)

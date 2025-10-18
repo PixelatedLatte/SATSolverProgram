@@ -1,7 +1,13 @@
 ﻿'''
     Desc: Defines the classes used by the SAT solver for DPLL algorithm
 '''
-from sympy import *
+import copy
+import glob
+import os
+import random
+from re import A
+from stringprep import in_table_a1
+#from sympy import *
 '''
     File Class:
         fileN: Name of the file
@@ -151,3 +157,104 @@ def unitPropagation(clauses, assignment):
         clauses = simplify(clauses, unit_clause_literal)
 
     return clauses, assignment, False
+
+
+def ClausesSatisfied(formula, assignment):
+    if (len(assignment) != formula.numClauses):
+        print("Error: Assignment length does not match number of clauses.")
+        return -1
+    clausesatisfied = 0;
+    clausenum = -1
+    #print(f"Assignment is {assignment}")
+    for clause in formula.clausesRaw:
+        clausenum += 1
+        varnum = -1
+        varsatisfied = 0
+        for var in clause:
+            varnum += 1
+            assignmentsign = assignment[var-1]
+            clausesign = formula.clausesNegation[clausenum][varnum]
+            #print(f"Var: {var}, Assignmentsign: {assignmentsign}, Clausesign: {clausesign}")
+            assignmentsign = int(assignmentsign)
+            if (assignmentsign == clausesign):
+                #print("Variable Satisfied")
+                varsatisfied = 1
+        if (varsatisfied >= 1):
+            clausesatisfied += 1
+            #print(f"Clause {clausenum} satisfied")
+        else:
+            pass
+            #print(f"Clause {clausenum} not satisfied")
+
+    #print(f"Clauses satisfied: {clausesatisfied} out of {formula.numClauses}")
+    return clausesatisfied
+           
+            
+
+def LocalSearch(formula, maxflips):
+    # Initialize assignment: "1 or 0" for each variable
+    assignment = ""
+    satisfiedlist = []
+    for i in range(formula.numClauses):
+        if random.choice([True, False]) == True:
+            assignment += "1"
+        else: 
+            assignment += "0"
+
+        
+    print(f"Initial assignment: {assignment}")
+
+    best_assignment = assignment
+    best_satisfied = ClausesSatisfied(formula, assignment)
+
+    for i in range(maxflips):
+        improved = False
+        for j in range(len(assignment)):
+            # flip bit j
+            flipped = '1' if assignment[j] == '0' else '0'
+            assignmenttemp = assignment[:j] + flipped + assignment[j+1:]
+            numsatisfied = ClausesSatisfied(formula, assignmenttemp)
+
+            # keep best found so far
+            if numsatisfied > best_satisfied:
+                best_satisfied = numsatisfied
+                best_assignment = assignmenttemp
+                improved = True
+
+        # update assignment if we found a better one
+        if improved:
+            assignment = best_assignment
+
+        print(f"After flip {i}, best assignment has {best_satisfied} clauses satisfied")
+    finalsatisfied = ClausesSatisfied(formula, assignment)
+    print(f"\n\nFINAL ASSIGNMENT: {finalsatisfied} clauses satisfied")
+    print(f"Total Clauses: {formula.numClauses}")
+    print(f"Final assignment: {assignment}")
+    return assignment
+
+
+def GeneticAlgorithm(formula, population_size, generations):
+    # Initialize assignment
+    assignment = ""
+    population_group = []
+    clauses_satisfied_group = []
+    inverted_prob_group = []
+    mutation_proportion = 0.02
+
+
+    for i in range(population_size):
+        for j in range(formula.numClauses):
+            if random.choice([True, False]) == True:
+                assignment += "1"
+            else: 
+                assignment += "0"
+
+        numsatisfied = ClausesSatisfied(formula, assignment)
+        population_group.append(assignment)
+        clauses_satisfied_group.append(numsatisfied)
+
+    print(f"Initial population: {population_group}")
+
+
+    
+    return assignment
