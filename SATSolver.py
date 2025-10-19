@@ -100,33 +100,39 @@ hard_files = load_cnf_files(hard_folder_path, hard_files)
 easy_formulas = read_cnf_files(easy_files)
 hard_formulas = read_cnf_files(hard_files)
 
+'''
 # Create negations of the formulas
 for formula in easy_formulas:
     create_negation(formula)
 
 for formula in hard_formulas:
     create_negation(formula)
-
-
-# Example: Print a specific formula’s clauses
-print(f"Easy formula 0: {easy_formulas[0].fileN}\n {easy_formulas[0].clausesRaw}\n")
-
-#assignments[pickUnassignedLiteral(easy_formulas[0].clausesRaw, assignments)] = True
-# Apply unit propagation
 '''
-easy_formulas[0].clausesRaw, assignments = dpll(
-    easy_formulas[0].clausesRaw, assignments
+
+print(f"Hard Formula 0: {hard_formulas[0].fileN}\n {hard_formulas[0].clausesRaw}\n")
+
+hard_formulas[0].clausesRaw, assignments = dpll(
+    hard_formulas[0].clausesRaw, assignments
 )
-'''
-#print(f"Assignments: {assignments}")
+
+print(f"Assignments: {assignments}")
+
+clauses = [[1, -2], [-1], [2,3]]
+print(f"Formula: {clauses}")
+sat, asg = dpll(clauses, {})
+
+
 '''
 print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
     f"Assignments: {assignments}, Conflict: {is_conflict}"
 )
-'''
+
+
+
 bit_flips = 30
 population_size = 10
 generations = 30
 SATClass.LocalSearch(hard_formulas[7], bit_flips)
 SATClass.GeneticAlgorithm(hard_formulas[7], population_size, generations)
+'''

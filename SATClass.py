@@ -33,38 +33,7 @@ class Node:
         self.parent = parent
         self.clauses = clauses
         self.assignment = assignment
-'''
-def dpll(clauses, assignment):
-    clauses, assignment, isConflict = unitPropagation(clauses, assignment)
 
-    # Local contradiction
-    if isConflict:
-        print("Did not find Solution...Conflict in this branch")
-        return False, None   # conflict -> backtrack
-
-    # Fully satisfied
-    if not clauses:
-        print("Found solution!!!")
-        return True, assignment
-    
-    literal = pickUnassignedLiteral(clauses, assignment)
-
-    # Try literal = True
-    result, solution = dpll(simplify(clauses, literal), {**assignment, literal: True})
-    if result:
-        print("Found solution!!!")
-        return True, solution
-
-    # If first branch failed (conflict in every subpath), try False
-    result, solution = dpll(simplify(clauses, literal), {**assignment, literal: False})
-    if result:
-        print("Found solution!!!")
-        return True, solution
-
-    # Both branches failed (conflicts everywhere)
-    print("Did not find Solution...Conflict in all branches")
-    return False, None   # GLOBAL unsatisfiability
-'''
 # dpll Algorithm using a stack instead of recursion, too many resources used when recurring too much
 def dpll(clauses, assignment):
     stack = []
@@ -78,6 +47,7 @@ def dpll(clauses, assignment):
         # Unit propagation
         clauses, assignment, isConflict = unitPropagation(clauses, assignment)
         if isConflict:
+            print("Conflict in this branch, backtracking...")
             continue  # Conflict, backtrack
 
         if not clauses:
@@ -86,6 +56,7 @@ def dpll(clauses, assignment):
 
         literal = pickUnassignedLiteral(clauses, assignment)
         if literal is None:
+            print("No assigned literals left here, backtracking...")
             continue  # No unassigned literals, backtrack
 
         # Try literal = False first, so True is explored first
@@ -102,17 +73,19 @@ def dpll(clauses, assignment):
 
 #Simplify all clauses in formula by removing clauses satisfied by literals
 def simplify(clauses, literal):
-    #given an assigned literal, remove all clauses in the formula that are satisfied by that literal
     if literal is None:
-        return clauses
+        return [list(clause) for clause in clauses] # Avoids mutating input
 
-    #If the literal is positive, remove all clauses containing that literal
-    if literal > 0:
-        clauses = [clause for clause in clauses if literal not in clause]
-    elif literal < 0:
-        clauses = [[lit for lit in clause if lit >= 0] for clause in clauses]
-    
-    return clauses
+    new_clauses = []
+    for clause in clauses:
+        # If clause is satisfied by literal, drop it
+        if literal in clause:
+            continue
+        # Otherwise remove the falsified literal (-literal) from the clause
+        reduced = [lit for lit in clause if lit != -literal]
+        new_clauses.append(reduced)
+
+    return new_clauses
     
 def pickUnassignedLiteral(clauses, assignment):
     for clause in clauses:
@@ -123,41 +96,61 @@ def pickUnassignedLiteral(clauses, assignment):
     return None  # All variables assigned
 
 def unitPropagation(clauses, assignment):
-    assignment = assignment.copy()  # Avoid mutating input assignment
+    clauses = [list(clause) for clause in clauses]   # avoid mutating input
+    assignment = assignment.copy()
+
     while True:
         unit_clause_literal = None
 
-        # Step 1: Find a unit clause
+        # Look for a unit clause or an immediate conflict
         for clause in clauses:
-            unassigned_literals = [lit for lit in clause if abs(lit) not in assignment]
-            clause_satisfied = any(
-                (lit > 0 and assignment.get(abs(lit), None) is True) or
-                (lit < 0 and assignment.get(abs(lit), None) is False)
-                for lit in clause if abs(lit) in assignment
-            )
-
+            # If clause already satisfied by current assignment, skip it
+            clause_satisfied = False
+            for lit in clause:
+                if abs(lit) in assignment:
+                    val = assignment[abs(lit)]
+                    if (lit > 0 and val) or (lit < 0 and not val):
+                        clause_satisfied = True
+                        break
             if clause_satisfied:
                 continue
 
-            if len(unassigned_literals) == 0:
-                return clauses, assignment, True  # conflict detected
+            # collect literals with unassigned variables
+            unassigned_literals = [lit for lit in clause if abs(lit) not in assignment]
 
+            # If no unassigned literals and clause not satisfied -> conflict
+            if len(unassigned_literals) == 0:
+                return clauses, assignment, True
+
+            # If exactly one unassigned literal -> unit clause
             if len(unassigned_literals) == 1:
                 unit_clause_literal = unassigned_literals[0]
                 break
 
         if unit_clause_literal is None:
-            break  # No more unit clauses
+            # no unit clause found -> fixpoint
+            break
 
-        # Step 3: Apply the forced assignment
-        assignment[abs(unit_clause_literal)] = unit_clause_literal > 0
-        assignment[abs(unit_clause_literal)] = unit_clause_literal > 0
+        # apply assignment forced by unit clause (preserve sign)
+        var = abs(unit_clause_literal)
+        value = unit_clause_literal > 0
+        # If var already assigned inconsistently -> conflict
+        if var in assignment:
+            if assignment[var] != value:
+                return clauses, assignment, True
+            # else already set to same value -> continue
+        else:
+            assignment[var] = value
 
-        # Step 4: Simplify the formula
+        # simplify formula with that literal set true
         clauses = simplify(clauses, unit_clause_literal)
 
-    return clauses, assignment, False
+        # After simplification if any empty clause exists -> conflict
+        for c in clauses:
+            if len(c) == 0:
+                return clauses, assignment, True
 
+    return clauses, assignment, False
 
 def ClausesSatisfied(formula, assignment):
     if (len(assignment) != formula.numClauses):
