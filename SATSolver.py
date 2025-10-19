@@ -108,20 +108,15 @@ for formula in easy_formulas:
 
 for formula in hard_formulas:
     create_negation(formula)
+    
+for formula in easy_formulas:
+    print(f"Easy Formula: {formula.fileN}\n {formula.clausesOriginal}\n")
 
+    formula.clausesOriginal, assignments = dpll(
+            formula.clausesOriginal, assignments
+    )
 
-print(f"Hard Formula 0: {hard_formulas[0].fileN}\n {hard_formulas[0].clausesRaw}\n")
-
-hard_formulas[0].clausesRaw, assignments = dpll(
-    hard_formulas[0].clausesRaw, assignments
-)
-
-print(f"Assignments: {assignments}")
-
-clauses = [[1, -2], [-1], [2,3]]
-print(f"Formula: {clauses}")
-sat, asg = dpll(clauses, {})
-
+    print(f"Assignments: {assignments}")
 
 '''
 print(
@@ -130,9 +125,10 @@ print(
 )
 '''
 
-
+'''
 bit_flips = 30
 population_size = 10
 generations = 30
 SATClass.LocalSearch(hard_formulas[7], bit_flips)
 SATClass.GeneticAlgorithm(hard_formulas[7], population_size, generations)
+'''

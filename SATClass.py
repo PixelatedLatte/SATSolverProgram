@@ -27,7 +27,8 @@ class File:
 '''
 Node Class:
 Parent: Parent node of current
-value: Individual variable of current node
+clauses: the clause set at this node
+assignment: Current assignment of variables
 '''
 class Node:
     def __init__(self, parent, clauses, assignment):
@@ -55,7 +56,7 @@ def dpll(clauses, assignment):
             print("Found solution!!!")
             return True, assignment  # Solution found
 
-        literal = pickUnassignedLiteral(clauses, assignment)
+        literal = pickMostConstrained(clauses, assignment)
         if literal is None:
             print("No assigned literals left here, backtracking...")
             continue  # No unassigned literals, backtrack
@@ -88,17 +89,35 @@ def simplify(clauses, literal):
 
     return new_clauses
     
-def pickUnassignedLiteral(clauses, assignment):
+#Counts the number of times a literal shows up in each clause for picking the unassigned literal
+def countLiteral(clauses):
+    count = {}
     for clause in clauses:
         for lit in clause:
-            var = abs(lit)
-            if var not in assignment:
-                return var
+            count[lit] = count.get(lit, 0) + 1
+    return count
+#Picks the most constraining unassigned literal that has not been chosen yet
+def pickMostConstrained(clauses, assignment):
+    count = countLiteral(clauses)
+
+    bestLit = None
+    bestCount = -1
+    for lit, cnt in count.items():
+        if abs(lit) in assignment:
+            continue # Literal already assigned
+        if cnt > bestCount: # If found a better literal
+            bestCount = cnt
+            bestLit = abs(lit)
+        if bestLit is not None: # If the best literal exists
+            return bestLit
     return None  # All variables assigned
 
 def unitPropagation(clauses, assignment):
     clauses = [list(clause) for clause in clauses]   # avoid mutating input
-    assignment = assignment.copy()
+    if assignment is None:
+        assignment = {}
+    else:
+        assignment = assignment.copy()
 
     while True:
         unit_clause_literal = None
