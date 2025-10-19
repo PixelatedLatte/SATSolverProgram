@@ -110,16 +110,15 @@ for formula in easy_formulas:
 
 for formula in hard_formulas:
     create_negation(formula)
-    
+
+''' 
 for formula in easy_formulas:
     print(f"Easy Formula: {formula.fileN}\n {formula.clausesOriginal}\n")
 
-    formula.clausesOriginal, assignments = dpll(
-            formula.clausesOriginal, assignments
-    )
+    formula.clausesOriginal, assignments = dpll(formula.clausesOriginal, assignments)
 
     print(f"Assignments: {assignments}")
-
+'''
 '''
 print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
@@ -127,12 +126,19 @@ print(
 )
 '''
 
-'''
-bit_flips = 30
-population_size = 200
-generations = 250
-LocalSearchBest = SATClass.LocalSearch(hard_formulas[7], bit_flips)
-GeneticAlgBest = SATClass.GeneticAlgorithm(hard_formulas[7], population_size, generations)
 
-print(f"\nLocal Search Best Assignment: {SATClass.ClausesSatisfied(hard_formulas[7], LocalSearchBest)}")
-print(f"Genetic Algorithm Best Assignment: {SATClass.ClausesSatisfied(hard_formulas[7], GeneticAlgBest)}")
+bit_flips = 20
+population_size = 150
+generations = 100
+FormulasCompleted = []
+ClausesSatisfiedLocalSearchList = []
+ClausesSatisfiedGeneticAlgList = []
+for formula in hard_formulas:
+    LocalSearchBest = SATClass.LocalSearch(formula, bit_flips)
+    GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations)
+
+    print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}")
+    print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}")
+    FormulasCompleted.append(formula.fileN)
+    ClausesSatisfiedLocalSearchList.append(SATClass.ClausesSatisfied(formula, LocalSearchBest))
+    ClausesSatisfiedGeneticAlgList.append(SATClass.ClausesSatisfied(formula, GeneticAlgBest))

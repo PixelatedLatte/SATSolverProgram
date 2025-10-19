@@ -215,7 +215,7 @@ def LocalSearch(formula, maxflips):
             assignment += "0"
 
         
-    print(f"Initial assignment: {assignment}")
+    #print(f"Initial assignment: {assignment}")
 
     best_assignment = assignment
     best_satisfied = ClausesSatisfied(formula, assignment)
@@ -238,11 +238,11 @@ def LocalSearch(formula, maxflips):
         if improved:
             assignment = best_assignment
 
-        print(f"After flip {i}, best assignment has {best_satisfied} clauses satisfied")
+        #print(f"After flip {i}, best assignment has {best_satisfied} clauses satisfied")
     finalsatisfied = ClausesSatisfied(formula, assignment)
-    print(f"\n\nFINAL ASSIGNMENT: {finalsatisfied} clauses satisfied")
-    print(f"Total Clauses: {formula.numClauses}")
-    print(f"Final assignment: {assignment}")
+    #print(f"\n\nFINAL ASSIGNMENT: {finalsatisfied} clauses satisfied")
+    #print(f"Total Clauses: {formula.numClauses}")
+    #print(f"Final assignment: {assignment}")
     return assignment
 
 
@@ -334,6 +334,6 @@ def GeneticAlgorithm(formula, population_size, generations):
             del clauses_satisfied_group[i]
             del inverted_prob_group[i]
         max_satisfied_index = clauses_satisfied_group.index(max(clauses_satisfied_group))
-        print(f"Final best assignment: {population_group[max_satisfied_index]} \nWith {max(clauses_satisfied_group)} clauses satisfied \nOut of {formula.numClauses}")
+        #print(f"Final best assignment: {population_group[max_satisfied_index]} \nWith {max(clauses_satisfied_group)} clauses satisfied \nOut of {formula.numClauses}")
 
     return population_group[max_satisfied_index]
