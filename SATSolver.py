@@ -55,9 +55,10 @@ def read_cnf_files(file_list):
 
         # Just adding a dummy values until negation function is called later
         negated_clauses = copy.deepcopy(clauses)
+        original_clauses = copy.deepcopy(clauses)
 
         # Build File object and add to list
-        file_info = File(file_path, len(clauses), clauses, negated_clauses)
+        file_info = File(file_path, len(clauses), clauses, negated_clauses, original_clauses)
         file_objects.append(file_info)
 
         print(f"Loaded File: {file_path:40} | Contains: {len(clauses):3} clauses.")
@@ -100,14 +101,14 @@ hard_files = load_cnf_files(hard_folder_path, hard_files)
 easy_formulas = read_cnf_files(easy_files)
 hard_formulas = read_cnf_files(hard_files)
 
-'''
+
 # Create negations of the formulas
 for formula in easy_formulas:
     create_negation(formula)
 
 for formula in hard_formulas:
     create_negation(formula)
-'''
+
 
 print(f"Hard Formula 0: {hard_formulas[0].fileN}\n {hard_formulas[0].clausesRaw}\n")
 
@@ -127,7 +128,7 @@ print(
     f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
     f"Assignments: {assignments}, Conflict: {is_conflict}"
 )
-
+'''
 
 
 bit_flips = 30
@@ -135,4 +136,3 @@ population_size = 10
 generations = 30
 SATClass.LocalSearch(hard_formulas[7], bit_flips)
 SATClass.GeneticAlgorithm(hard_formulas[7], population_size, generations)
-'''

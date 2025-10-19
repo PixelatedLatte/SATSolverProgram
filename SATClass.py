@@ -16,11 +16,12 @@ from stringprep import in_table_a1
         clausesNegation: Negated clauses for DPLL algorithm
 '''
 class File:
-    def __init__(self, fileN, numClauses, clausesRaw, clausesNegation):
+    def __init__(self, fileN, numClauses, clausesRaw, clausesNegation, clausesOriginal):
         self.fileN = fileN
         self.numClauses = numClauses
         self.clausesRaw = clausesRaw
         self.clausesNegation = clausesNegation
+        self.clausesOriginal = clausesOriginal
 
 
 '''
