@@ -228,16 +228,22 @@ def LocalSearch(formula, maxflips):
 
 
 def GeneticAlgorithm(formula, population_size, generations):
-    # Initialize assignment
+    
+    # Initialize afflicting vars
     assignment = ""
     population_group = []
     clauses_satisfied_group = []
     inverted_prob_group = []
-    mutation_proportion = 0.02
+    mutation_proportion = 0.01
 
+    # Creating the amount of population to reproduce each generation
+    # 20% will be culled, and the rest will reproduce to maintain population size
+    crossover_amount = int(population_size / 3)
 
+    # Create initial population
     for i in range(population_size):
-        for j in range(formula.numClauses):
+        assignment = ""  # reset each time
+        for j in range(formula.numClauses):  # or formula.numVariables if that's what you meant
             if random.choice([True, False]) == True:
                 assignment += "1"
             else: 
@@ -246,9 +252,69 @@ def GeneticAlgorithm(formula, population_size, generations):
         numsatisfied = ClausesSatisfied(formula, assignment)
         population_group.append(assignment)
         clauses_satisfied_group.append(numsatisfied)
-
-    print(f"Initial population: {population_group}")
-
-
     
-    return assignment
+
+    # Cull and breed over generations
+    for gen in range(generations):  # changed i -> gen to avoid reusing
+
+        # Generate new population from current population (Random assignment selection)
+        for x in range(crossover_amount):  
+
+            # Tournament selection for parents
+            tournament_size = 3
+            tournament_selection = []
+            for t in range(tournament_size):
+                rand_index = random.randint(0, len(population_group) - 1)
+                tournament_selection.append((population_group[rand_index], clauses_satisfied_group[rand_index]))
+            father = max(tournament_selection, key=lambda item: item[1])[0]
+            tournament_selection = []
+            for t in range(tournament_size):
+                rand_index = random.randint(0, len(population_group) - 1)
+                tournament_selection.append((population_group[rand_index], clauses_satisfied_group[rand_index]))
+            mother = max(tournament_selection, key=lambda item: item[1])[0]
+
+
+            assignment = ""  # reset before building new one
+            # 50% chance for each bit to come from either parent
+            for j in range(len(father)):
+                if random.choice([True, False]) == True:
+                    assignment += father[j]
+                else: 
+                    assignment += mother[j]
+
+            # Adding other data of assignment to array
+            numsatisfied = ClausesSatisfied(formula, assignment)
+            population_group.append(assignment)
+            clauses_satisfied_group.append(numsatisfied)
+        
+        # Create inverted probabilities for culling
+        inverted_prob_group = []  # reset this list each generation
+        for j in range(len(population_group)):
+            inverted_prob = formula.numClauses - clauses_satisfied_group[j]
+            inverted_prob_group.append(inverted_prob)
+
+        # Mutate some assignments in population
+        for j in range(len(population_group)):
+            bits = list(population_group[j])  # convert to list for mutability
+            for k in range(len(bits)):
+                if random.random() <= mutation_proportion:
+                    # Flip bit
+                    bits[k] = '1' if bits[k] == '0' else '0'
+            population_group[j] = ''.join(bits)
+            # Update clauses satisfied after mutation
+            clauses_satisfied_group[j] = ClausesSatisfied(formula, population_group[j])
+
+        # Cull the assignments from population (Weighted to remove assignments that satisfy less clauses)
+        for j in range(crossover_amount):
+            total_satisfied_gen = sum(inverted_prob_group)
+            chosen_assignment = random.randint(1, total_satisfied_gen)  # fixed random.randint
+            i = 0
+            while(chosen_assignment > inverted_prob_group[i]):
+                chosen_assignment -= inverted_prob_group[i]
+            del population_group[i]
+            del clauses_satisfied_group[i]
+            del inverted_prob_group[i]
+        max_satisfied_index = clauses_satisfied_group.index(max(clauses_satisfied_group))
+        print(f"Final best assignment: {population_group[max_satisfied_index]} \nWith {max(clauses_satisfied_group)} clauses satisfied \nOut of {formula.numClauses}")
+
+    return population_group[max_satisfied_index]

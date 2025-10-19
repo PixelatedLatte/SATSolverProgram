@@ -55,6 +55,8 @@ def read_cnf_files(file_list):
 
         # Just adding a dummy values until negation function is called later
         negated_clauses = copy.deepcopy(clauses)
+
+        # creating original clauses copy for DPLL use
         original_clauses = copy.deepcopy(clauses)
 
         # Build File object and add to list
@@ -110,17 +112,17 @@ for formula in hard_formulas:
     create_negation(formula)
 
 
-print(f"Hard Formula 0: {hard_formulas[0].fileN}\n {hard_formulas[0].clausesRaw}\n")
+#print(f"Hard Formula 0: {hard_formulas[0].fileN}\n {hard_formulas[0].clausesRaw}\n")
 
 hard_formulas[0].clausesRaw, assignments = dpll(
     hard_formulas[0].clausesRaw, assignments
 )
 
-print(f"Assignments: {assignments}")
+#print(f"Assignments: {assignments}")
 
-clauses = [[1, -2], [-1], [2,3]]
-print(f"Formula: {clauses}")
-sat, asg = dpll(clauses, {})
+#clauses = [[1, -2], [-1], [2,3]]
+#print(f"Formula: {clauses}")
+#sat, asg = dpll(clauses, {})
 
 
 '''
@@ -132,7 +134,10 @@ print(
 
 
 bit_flips = 30
-population_size = 10
-generations = 30
-SATClass.LocalSearch(hard_formulas[7], bit_flips)
-SATClass.GeneticAlgorithm(hard_formulas[7], population_size, generations)
+population_size = 200
+generations = 250
+LocalSearchBest = SATClass.LocalSearch(hard_formulas[7], bit_flips)
+GeneticAlgBest = SATClass.GeneticAlgorithm(hard_formulas[7], population_size, generations)
+
+print(f"\nLocal Search Best Assignment: {SATClass.ClausesSatisfied(hard_formulas[7], LocalSearchBest)}")
+print(f"Genetic Algorithm Best Assignment: {SATClass.ClausesSatisfied(hard_formulas[7], GeneticAlgBest)}")
