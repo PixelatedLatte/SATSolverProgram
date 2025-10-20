@@ -61,7 +61,7 @@ def read_cnf_files(file_list):
         original_clauses = copy.deepcopy(clauses)
 
         # Build File object and add to list
-        file_info = File(file_path, len(clauses), clauses, negated_clauses, original_clauses)
+        file_info = File(file_path, len(clauses), num_vars, clauses, negated_clauses, original_clauses)
         file_objects.append(file_info)
 
         print(f"Loaded File: {file_path:40} | Contains: {len(clauses):3} clauses.")
@@ -71,20 +71,14 @@ def read_cnf_files(file_list):
 def create_negation(formula):
     formula.clausesNegation = copy.deepcopy(formula.clausesRaw)
     for clause in formula.clausesNegation:
-            #print(f"Creating negation of {clause}")
             for i in range(len(clause)):
                 if clause[i] > 0:
                     clause[i] = 1
                 else:
                     clause[i] = 0
-    #print("\nAfter negation:")
-    #for clause in formula.clausesNegation:
-        #print(f"Pos or Neg variable: {clause}")
     for clause in formula.clausesRaw:
-        #print(f"Original clause: {clause}")
         for i in range(len(clause)):
             clause[i] = abs(clause[i])
-        #print(f"New clause: {clause}")
 
 
 
@@ -123,15 +117,17 @@ for formula in easy_formulas:
 endTime = time.time()
 print(f"Time taken to create negations for hard formulas: {endTime - startTime} seconds")
 
-bit_flips = 20
-population_size = 150
-generations = 100
+population_size = 100
+generations = 150
+# 1% chance for an assignement to mutate 1 bit, 1/3 of population will be culled each generation
+mutation_proportion = .01
+crossover_amount = int(population_size / 3)
 FormulasCompleted = []
 ClausesSatisfiedLocalSearchList = []
 ClausesSatisfiedGeneticAlgList = []
 for formula in hard_formulas:
-    LocalSearchBest = SATClass.LocalSearch(formula, bit_flips)
-    GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations)
+    LocalSearchBest = SATClass.LocalSearch(formula)
+    GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount)
 
     print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}")
     print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}")
