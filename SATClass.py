@@ -239,18 +239,13 @@ def LocalSearch(formula):
                 break
     return best_assignment
 
-def GeneticAlgorithm(formula, population_size, generations, mutation_proportion):
+def GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount):
     
     # Initialize empty arrays and first set of assignemnts
     assignment = ""
     population_group = []
     clauses_satisfied_group = []
     inverted_prob_group = []
-
-
-    # Creating the amount of population to reproduce each generation
-    # 33% will be culled, and the rest will reproduce to maintain population size
-    crossover_amount = int(population_size / 3)
 
     # Create initial population
     for i in range(population_size):
