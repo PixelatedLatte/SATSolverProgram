@@ -60,7 +60,7 @@ def read_cnf_files(file_list):
         original_clauses = copy.deepcopy(clauses)
 
         # Build File object and add to list
-        file_info = File(file_path, len(clauses), clauses, negated_clauses, original_clauses)
+        file_info = File(file_path, len(clauses), num_vars, clauses, negated_clauses, original_clauses)
         file_objects.append(file_info)
 
         print(f"Loaded File: {file_path:40} | Contains: {len(clauses):3} clauses.")
@@ -127,15 +127,15 @@ print(
 '''
 
 
-bit_flips = 20
-population_size = 150
-generations = 100
+population_size = 100
+generations = 150
+mutation_proportion = .01
 FormulasCompleted = []
 ClausesSatisfiedLocalSearchList = []
 ClausesSatisfiedGeneticAlgList = []
 for formula in hard_formulas:
-    LocalSearchBest = SATClass.LocalSearch(formula, bit_flips)
-    GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations)
+    LocalSearchBest = SATClass.LocalSearch(formula)
+    GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion)
 
     print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}")
     print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}")
