@@ -6,6 +6,8 @@ import glob
 import os
 import random
 import time
+import csv
+import numpy as np
 from re import A
 from stringprep import in_table_a1
 from SATClass import *
@@ -123,22 +125,28 @@ crossover_amount = int(population_size / 3)
 FormulasCompleted = []
 ClausesSatisfiedLocalSearchList = []
 ClausesSatisfiedGeneticAlgList = []
+ProportionClauses = []
+totalTimes = []
 for formula in hard_formulas:
     startTime = time.time()
     LocalSearchBest = SATClass.LocalSearch(formula)
     endTime = time.time()
     print(f"Time taken for Local Search on {formula.fileN}: {endTime - startTime:.3f} seconds")
+    totalTimes.append(endTime-startTime)
 
     localBestCount = ClausesSatisfied(formula, LocalSearchBest)
     print(f"Proportion of clauses satisfied by Local Search on {formula.fileN}: {localBestCount/formula.numClauses:.2f}")
+    ProportionClauses.append(localBestCount/formula.numClauses)
 
     startTime = time.time()
     GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount)
     endTime = time.time()
     print(f"Time taken for Genetic Algorithm on {formula.fileN}: {endTime - startTime:.3f} seconds")
+    totalTimes.append(endTime-startTime)
 
     geneticBestCount = ClausesSatisfied(formula, GeneticAlgBest)
     print(f"Proportion of clauses satisfied by Genetic Algorithm on {formula.fileN}: {geneticBestCount/formula.numClauses:.2f}")
+
 
     print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}")
     print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}")
