@@ -5,7 +5,7 @@ import copy
 import glob
 import os
 import random
-from re import A
+from re import A, S
 from stringprep import in_table_a1
 #from sympy import *
 '''
@@ -16,9 +16,10 @@ from stringprep import in_table_a1
         clausesNegation: Negated clauses for DPLL algorithm
 '''
 class File:
-    def __init__(self, fileN, numClauses, clausesRaw, clausesNegation, clausesOriginal):
+    def __init__(self, fileN, numClauses, numVars, clausesRaw, clausesNegation, clausesOriginal):
         self.fileN = fileN
         self.numClauses = numClauses
+        self.numVars = numVars
         self.clausesRaw = clausesRaw
         self.clausesNegation = clausesNegation
         self.clausesOriginal = clausesOriginal
@@ -49,14 +50,13 @@ def dpll(clauses, assignment):
         # Unit propagation
         clauses, assignment, isConflict = unitPropagation(clauses, assignment)
         if isConflict:
-            print("Conflict in this branch, backtracking...")
             continue  # Conflict, backtrack
 
         if not clauses:
             print("Found solution!!!")
             return True, assignment  # Solution found
 
-        literal = pickMostConstrained(clauses, assignment)
+        literal = pickMostConstraining(clauses, assignment)
         if literal is None:
             print("No assigned literals left here, backtracking...")
             continue  # No unassigned literals, backtrack
@@ -94,23 +94,22 @@ def countLiteral(clauses):
     count = {}
     for clause in clauses:
         for lit in clause:
-            count[lit] = count.get(lit, 0) + 1
+            v = abs(lit)
+            count[v] = count.get(v, 0) + 1
     return count
 #Picks the most constraining unassigned literal that has not been chosen yet
-def pickMostConstrained(clauses, assignment):
+def pickMostConstraining(clauses, assignment):
     count = countLiteral(clauses)
 
     bestLit = None
     bestCount = -1
     for lit, cnt in count.items():
-        if abs(lit) in assignment:
+        if lit in assignment:
             continue # Literal already assigned
         if cnt > bestCount: # If found a better literal
             bestCount = cnt
-            bestLit = abs(lit)
-        if bestLit is not None: # If the best literal exists
-            return bestLit
-    return None  # All variables assigned
+            bestLit = lit
+    return bestLit # All variables assigned
 
 def unitPropagation(clauses, assignment):
     clauses = [list(clause) for clause in clauses]   # avoid mutating input
@@ -124,6 +123,11 @@ def unitPropagation(clauses, assignment):
 
         # Look for a unit clause or an immediate conflict
         for clause in clauses:
+            # tautology clause, skip it
+            s = set(clause)
+            if any(-lit in s for lit in s):
+                continue
+
             # If clause already satisfied by current assignment, skip it
             clause_satisfied = False
             for lit in clause:
@@ -137,14 +141,15 @@ def unitPropagation(clauses, assignment):
 
             # collect literals with unassigned variables
             unassigned_literals = [lit for lit in clause if abs(lit) not in assignment]
+            unique_unassigned = set(unassigned_literals)
 
             # If no unassigned literals and clause not satisfied -> conflict
-            if len(unassigned_literals) == 0:
+            if len(unique_unassigned) == 0:
                 return clauses, assignment, True
 
             # If exactly one unassigned literal -> unit clause
-            if len(unassigned_literals) == 1:
-                unit_clause_literal = unassigned_literals[0]
+            if len(unique_unassigned) == 1:
+                unit_clause_literal = next(iter(unique_unassigned))
                 break
 
         if unit_clause_literal is None:
@@ -173,127 +178,112 @@ def unitPropagation(clauses, assignment):
     return clauses, assignment, False
 
 def ClausesSatisfied(formula, assignment):
-    if (len(assignment) != formula.numClauses):
-        print("Error: Assignment length does not match number of clauses.")
+    # If assignment length does not match number of variables, error + exit
+    if (len(assignment) != formula.numVars):
+        print("Error: Assignment length does not match number of variables.")
         return -1
     clausesatisfied = 0;
     clausenum = -1
-    #print(f"Assignment is {assignment}")
+
+    # For each clause in formula, check if satisfied by assignment
     for clause in formula.clausesRaw:
         clausenum += 1
         varnum = -1
         varsatisfied = 0
+        # use clauseNegation (same size as clauseRaw), 
+        # which replaces values such as [1, -3, 4] with [1, 0, 1] for easier checking]
         for var in clause:
             varnum += 1
             assignmentsign = assignment[var-1]
             clausesign = formula.clausesNegation[clausenum][varnum]
-            #print(f"Var: {var}, Assignmentsign: {assignmentsign}, Clausesign: {clausesign}")
             assignmentsign = int(assignmentsign)
             if (assignmentsign == clausesign):
-                #print("Variable Satisfied")
                 varsatisfied = 1
+        # if at least one variable evals to true, increment, clause is satisfied
         if (varsatisfied >= 1):
             clausesatisfied += 1
-            #print(f"Clause {clausenum} satisfied")
         else:
             pass
-            #print(f"Clause {clausenum} not satisfied")
-
-    #print(f"Clauses satisfied: {clausesatisfied} out of {formula.numClauses}")
     return clausesatisfied
            
             
 
-def LocalSearch(formula, maxflips):
-    # Initialize assignment: "1 or 0" for each variable
+def LocalSearch(formula):
+    # Initialize assignment: 50-50 for each var being a 1 or 0
     assignment = ""
-    satisfiedlist = []
-    for i in range(formula.numClauses):
+    for i in range(formula.numVars):
         if random.choice([True, False]) == True:
             assignment += "1"
         else: 
             assignment += "0"
-
-        
-    print(f"Initial assignment: {assignment}")
-
+    
+    # set best assignemnt and best satisfied clauses to be initial
     best_assignment = assignment
     best_satisfied = ClausesSatisfied(formula, assignment)
+    improved = True
 
-    for i in range(maxflips):
+    # As long as we can improve number of clauses statisfied with only 1 bit flip, keep going
+    while (improved == True):
         improved = False
         for j in range(len(assignment)):
-            # flip bit j
-            flipped = '1' if assignment[j] == '0' else '0'
+            # Flip each individual bit and check if better
+            if assignment[j] == "0":
+                flipped = "1" 
+            else:
+                flipped = "0"
             assignmenttemp = assignment[:j] + flipped + assignment[j+1:]
             numsatisfied = ClausesSatisfied(formula, assignmenttemp)
-
-            # keep best found so far
+            
+            # if better, update bests and break to restart from beginning (no need to check rest of bitflip possibilities)
             if numsatisfied > best_satisfied:
-                best_satisfied = numsatisfied
-                best_assignment = assignmenttemp
                 improved = True
+                best_satisfied = numsatisfied
+                assignment = assignmenttemp
+                best_assignment = assignmenttemp
+                break
+    return best_assignment
 
-        # update assignment if we found a better one
-        if improved:
-            assignment = best_assignment
-
-        print(f"After flip {i}, best assignment has {best_satisfied} clauses satisfied")
-    finalsatisfied = ClausesSatisfied(formula, assignment)
-    print(f"\n\nFINAL ASSIGNMENT: {finalsatisfied} clauses satisfied")
-    print(f"Total Clauses: {formula.numClauses}")
-    print(f"Final assignment: {assignment}")
-    return assignment
-
-
-def GeneticAlgorithm(formula, population_size, generations):
+def GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount):
     
-    # Initialize afflicting vars
+    # Initialize empty arrays and first set of assignemnts
     assignment = ""
     population_group = []
     clauses_satisfied_group = []
     inverted_prob_group = []
-    mutation_proportion = 0.01
-
-    # Creating the amount of population to reproduce each generation
-    # 20% will be culled, and the rest will reproduce to maintain population size
-    crossover_amount = int(population_size / 3)
 
     # Create initial population
     for i in range(population_size):
         assignment = ""  # reset each time
-        for j in range(formula.numClauses):  # or formula.numVariables if that's what you meant
+        for i in range(formula.numVars):  # Generates random string assignment that is the size of the # of vars in formula
             if random.choice([True, False]) == True:
                 assignment += "1"
             else: 
                 assignment += "0"
 
-        numsatisfied = ClausesSatisfied(formula, assignment)
+        numsatisfied = ClausesSatisfied(formula, assignment) # Also append their # of clauses satisfied + the actual assignment
+        # Also append their # of clauses satisfied + the actual assignment
         population_group.append(assignment)
         clauses_satisfied_group.append(numsatisfied)
     
-
-    # Cull and breed over generations
-    for gen in range(generations):  # changed i -> gen to avoid reusing
-
-        # Generate new population from current population (Random assignment selection)
+    # Breed to get pop + cullnum
+    for gen in range(generations):
+        # Generate new population from current population (Tournament selection for parents)
         for x in range(crossover_amount):  
-
-            # Tournament selection for parents
             tournament_size = 3
             tournament_selection = []
+            # Pick X num of random assigments, let the best fit once be the Father
             for t in range(tournament_size):
                 rand_index = random.randint(0, len(population_group) - 1)
                 tournament_selection.append((population_group[rand_index], clauses_satisfied_group[rand_index]))
             father = max(tournament_selection, key=lambda item: item[1])[0]
+            # Reset and rerun for mom
             tournament_selection = []
             for t in range(tournament_size):
                 rand_index = random.randint(0, len(population_group) - 1)
                 tournament_selection.append((population_group[rand_index], clauses_satisfied_group[rand_index]))
             mother = max(tournament_selection, key=lambda item: item[1])[0]
 
-
-            assignment = ""  # reset before building new one
+            assignment = ""
             # 50% chance for each bit to come from either parent
             for j in range(len(father)):
                 if random.choice([True, False]) == True:
@@ -301,16 +291,10 @@ def GeneticAlgorithm(formula, population_size, generations):
                 else: 
                     assignment += mother[j]
 
-            # Adding other data of assignment to array
+            # Adding new assignments to population array
             numsatisfied = ClausesSatisfied(formula, assignment)
             population_group.append(assignment)
             clauses_satisfied_group.append(numsatisfied)
-        
-        # Create inverted probabilities for culling
-        inverted_prob_group = []  # reset this list each generation
-        for j in range(len(population_group)):
-            inverted_prob = formula.numClauses - clauses_satisfied_group[j]
-            inverted_prob_group.append(inverted_prob)
 
         # Mutate some assignments in population
         for j in range(len(population_group)):
@@ -318,22 +302,37 @@ def GeneticAlgorithm(formula, population_size, generations):
             for k in range(len(bits)):
                 if random.random() <= mutation_proportion:
                     # Flip bit
-                    bits[k] = '1' if bits[k] == '0' else '0'
-            population_group[j] = ''.join(bits)
+                    if individual[k] == "0":
+                        flipped = "1"
+                    else:
+                        flipped = "0"
+                    individual = individual[:k] + flipped + individual[k+1:]
+            population_group[j] = individual
             # Update clauses satisfied after mutation
             clauses_satisfied_group[j] = ClausesSatisfied(formula, population_group[j])
+        
+        # Create inverted probabilities, which is the number of clauses NOT satisfied,
+        # Divides by the total sum of clauses not satisfied from the whole population
+        inverted_prob_group = []
+        for j in range(len(population_group)):
+            inverted_prob = formula.numClauses - clauses_satisfied_group[j]
+            inverted_prob_group.append(inverted_prob)
 
         # Cull the assignments from population (Weighted to remove assignments that satisfy less clauses)
         for j in range(crossover_amount):
             total_satisfied_gen = sum(inverted_prob_group)
-            chosen_assignment = random.randint(1, total_satisfied_gen)  # fixed random.randint
+            chosen_assignment = random.randint(1, total_satisfied_gen)
             i = 0
-            while(chosen_assignment > inverted_prob_group[i]):
+            while i < len(inverted_prob_group) - 1 and chosen_assignment > inverted_prob_group[i]:
                 chosen_assignment -= inverted_prob_group[i]
+                i += 1
+            # Remove selected weak individual
             del population_group[i]
             del clauses_satisfied_group[i]
             del inverted_prob_group[i]
+        
+        # return the best assignment after all generations complete
         max_satisfied_index = clauses_satisfied_group.index(max(clauses_satisfied_group))
-        print(f"Final best assignment: {population_group[max_satisfied_index]} \nWith {max(clauses_satisfied_group)} clauses satisfied \nOut of {formula.numClauses}")
 
     return population_group[max_satisfied_index]
+

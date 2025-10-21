@@ -5,6 +5,7 @@ import copy
 import glob
 import os
 import random
+import time
 from re import A
 from stringprep import in_table_a1
 from SATClass import *
@@ -60,7 +61,7 @@ def read_cnf_files(file_list):
         original_clauses = copy.deepcopy(clauses)
 
         # Build File object and add to list
-        file_info = File(file_path, len(clauses), clauses, negated_clauses, original_clauses)
+        file_info = File(file_path, len(clauses), num_vars, clauses, negated_clauses, original_clauses)
         file_objects.append(file_info)
 
         print(f"Loaded File: {file_path:40} | Contains: {len(clauses):3} clauses.")
@@ -70,20 +71,14 @@ def read_cnf_files(file_list):
 def create_negation(formula):
     formula.clausesNegation = copy.deepcopy(formula.clausesRaw)
     for clause in formula.clausesNegation:
-            #print(f"Creating negation of {clause}")
             for i in range(len(clause)):
                 if clause[i] > 0:
                     clause[i] = 1
                 else:
                     clause[i] = 0
-    #print("\nAfter negation:")
-    #for clause in formula.clausesNegation:
-        #print(f"Pos or Neg variable: {clause}")
     for clause in formula.clausesRaw:
-        #print(f"Original clause: {clause}")
         for i in range(len(clause)):
             clause[i] = abs(clause[i])
-        #print(f"New clause: {clause}")
 
 
 
@@ -108,31 +103,34 @@ hard_formulas = read_cnf_files(hard_files)
 for formula in easy_formulas:
     create_negation(formula)
 
+
 for formula in hard_formulas:
     create_negation(formula)
-    
+
+startTime = time.time()
 for formula in easy_formulas:
     print(f"Easy Formula: {formula.fileN}\n {formula.clausesOriginal}\n")
 
-    formula.clausesOriginal, assignments = dpll(
-            formula.clausesOriginal, assignments
-    )
+    formula.clausesOriginal, assignments = dpll(formula.clausesOriginal, assignments)
 
     print(f"Assignments: {assignments}")
+endTime = time.time()
+print(f"Time taken to create negations for hard formulas: {endTime - startTime} seconds")
 
-'''
-print(
-    f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
-    f"Assignments: {assignments}, Conflict: {is_conflict}"
-)
-'''
+population_size = 100
+generations = 150
+# 1% chance for an assignement to mutate 1 bit, 1/3 of population will be culled each generation
+mutation_proportion = .01
+crossover_amount = int(population_size / 3)
+FormulasCompleted = []
+ClausesSatisfiedLocalSearchList = []
+ClausesSatisfiedGeneticAlgList = []
+for formula in hard_formulas:
+    LocalSearchBest = SATClass.LocalSearch(formula)
+    GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount)
 
-'''
-bit_flips = 30
-population_size = 200
-generations = 250
-LocalSearchBest = SATClass.LocalSearch(hard_formulas[7], bit_flips)
-GeneticAlgBest = SATClass.GeneticAlgorithm(hard_formulas[7], population_size, generations)
-
-print(f"\nLocal Search Best Assignment: {SATClass.ClausesSatisfied(hard_formulas[7], LocalSearchBest)}")
-print(f"Genetic Algorithm Best Assignment: {SATClass.ClausesSatisfied(hard_formulas[7], GeneticAlgBest)}")
+    print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}")
+    print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}")
+    FormulasCompleted.append(formula.fileN)
+    ClausesSatisfiedLocalSearchList.append(SATClass.ClausesSatisfied(formula, LocalSearchBest))
+    ClausesSatisfiedGeneticAlgList.append(SATClass.ClausesSatisfied(formula, GeneticAlgBest))
