@@ -1,3 +1,4 @@
 Formula,Algorithm,Clauses Prop,Time
-0,Local Search,0.9780487804878049,0.20221281051635742
-0,Genetic,0.9780487804878049,4.517982006072998
+0,Local Search,0.98,0.212
+0,Genetic,0.96,5.269
+0,DPLL,,2.119

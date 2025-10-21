@@ -81,111 +81,144 @@ def create_negation(formula):
     for clause in formula.clausesRaw:
         for i in range(len(clause)):
             clause[i] = abs(clause[i])
-assignments = {}
-easy_files = []
-hard_files = []
+'''
+def average(runTimeClause, averageTimeClause):
+    if averageTimeClause == []:
+        for i in range(len(runTimeClause)-1):
+            averageTimeClause.append(runTimeClause[i])
+    else:
+        for i in range(len(runTimeClause)-1):
+            averageTimeClause[i] = (averageTimeClause[i] + runTimeClause[i]) / 2
+'''
+def update_running_avg(run, avg, run_index):
+    # run_index: number of previous runs already included (0-based)
+    for i, v in enumerate(run):
+        if i >= len(avg):
+            avg.append(v)
+        else:
+            avg[i] = (avg[i] * run_index + v) / (run_index + 1)
+def main():
+    assignments = {}
+    easy_files = []
+    hard_files = []
 
-# Folder paths
-easy_folder_path = r'CNF Formulas'
-hard_folder_path = r'HARD CNF Formulas'
+    # Folder paths
+    easy_folder_path = r'CNF Formulas'
+    hard_folder_path = r'HARD CNF Formulas'
 
-# Load file paths
-easy_files = load_cnf_files(easy_folder_path, easy_files)
-hard_files = load_cnf_files(hard_folder_path, hard_files)
+    # Load file paths
+    easy_files = load_cnf_files(easy_folder_path, easy_files)
+    hard_files = load_cnf_files(hard_folder_path, hard_files)
 
-# Read and parse CNF files into File class objects
-easy_formulas = read_cnf_files(easy_files)
-hard_formulas = read_cnf_files(hard_files)
-
-
-# Create negations of the formulas
-for formula in easy_formulas:
-    create_negation(formula)
+    # Read and parse CNF files into File class objects
+    easy_formulas = read_cnf_files(easy_files)
+    hard_formulas = read_cnf_files(hard_files)
 
 
-for formula in hard_formulas:
-    create_negation(formula)
+    # Create negations of the formulas
+    for formula in easy_formulas:
+        create_negation(formula)
 
 
-startTime = time.time()
-for formula in easy_formulas:
-    print(f"Easy Formula: {formula.fileN}\n {formula.clausesOriginal}\n")
+    for formula in hard_formulas:
+        create_negation(formula)
 
-    formula.clausesOriginal, assignments = dpll(formula.clausesOriginal, assignments)
 
-    print(f"Assignments: {assignments}")
-endTime = time.time()
-print(f"Time taken to create negations for hard formulas: {endTime - startTime} seconds")
+    dpllTimes = []
+    for formula in hard_formulas:
+        startTime = time.time()
+        print(f"Hard Formula: {formula.fileN}\n {formula.clausesOriginal}\n")
 
-population_size = 100
-generations = 150
-# 1% chance for an assignement to mutate 1 bit, 1/3 of population will be culled each generation
-mutation_proportion = .02
-crossover_amount = int(population_size / 3)
-FormulasCompleted = []
-ClausesSatisfiedLocalSearchList = []
-ClausesSatisfiedGeneticAlgList = []
-ProportionClausesLocal = []
-ProportionClausesGenetic = []
-TotalTimesLocal = []
-TotalTimesGenetic = []
-for cnt, formula in enumerate(hard_formulas):
-    startTime = time.time()
-    LocalSearchBest = SATClass.LocalSearch(formula)
-    endTime = time.time()
-    LocalSearchTime = endTime - startTime
-    print(f"Time taken for Local Search on {formula.fileN}: {LocalSearchTime:.3f} seconds")
-    TotalTimesLocal.append(LocalSearchTime)
+        formula.clausesOriginal, assignments = dpll(formula.clausesOriginal, assignments)
 
-    localBestCount = ClausesSatisfied(formula, LocalSearchBest)
-    print(f"Proportion of clauses satisfied by Local Search on {formula.fileN}: {localBestCount/formula.numClauses:.2f}\n")
-    ProportionClausesLocal.append(localBestCount/formula.numClauses)
+        print(f"Assignments: {assignments}")
+        endTime = time.time()
+        print(f"Time to solve {formula.fileN} using DPLL: {endTime - startTime} seconds\n")
+        dpllTimes.append(endTime-startTime)
 
-    startTime = time.time()
-    GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount)
-    endTime = time.time()
-    GeneticAlgTime = endTime - startTime
-    print(f"Time taken for Genetic Algorithm on {formula.fileN}: {GeneticAlgTime:.3f} seconds\n")
-    TotalTimesGenetic.append(GeneticAlgTime)
+    population_size = 100
+    generations = 150
+    # 1% chance for an assignement to mutate 1 bit, 1/3 of population will be culled each generation
+    mutation_proportion = .02
+    crossover_amount = int(population_size / 3)
+    FormulasCompleted = []
+    ClausesSatisfiedLocalSearchList = []
+    ClausesSatisfiedGeneticAlgList = []
+    AverageClausesLocal = []
+    AverageTimeLocal = []
+    AverageClausesGenetic = []
+    AverageTimeGenetic = []
+    for i in range(0,5):
+        ProportionClausesLocal = []
+        ProportionClausesGenetic = []
+        TotalTimesLocal = []
+        TotalTimesGenetic = []
+        for formula in hard_formulas:
+            startTime = time.time()
+            LocalSearchBest = SATClass.LocalSearch(formula)
+            endTime = time.time()
+            LocalSearchTime = endTime - startTime
+            print(f"Time taken for Local Search on {formula.fileN}: {LocalSearchTime:.3f} seconds")
+            TotalTimesLocal.append(LocalSearchTime)
 
-    geneticBestCount = ClausesSatisfied(formula, GeneticAlgBest)
-    print(f"Proportion of clauses satisfied by Genetic Algorithm on {formula.fileN}: {geneticBestCount/formula.numClauses:.2f}\n")
-    ProportionClausesGenetic.append(geneticBestCount/formula.numClauses)
+            localBestCount = ClausesSatisfied(formula, LocalSearchBest)
+            print(f"Proportion of clauses satisfied by Local Search on {formula.fileN}: {localBestCount/formula.numClauses:.2f}\n")
+            ProportionClausesLocal.append(localBestCount/formula.numClauses)
 
-    print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}\n")
-    print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}\n")
-    FormulasCompleted.append(formula.fileN)
-    ClausesSatisfiedLocalSearchList.append(SATClass.ClausesSatisfied(formula, LocalSearchBest))
-    ClausesSatisfiedGeneticAlgList.append(SATClass.ClausesSatisfied(formula, GeneticAlgBest))
-    break
+            startTime = time.time()
+            GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount)
+            endTime = time.time()
+            GeneticAlgTime = endTime - startTime
+            print(f"Time taken for Genetic Algorithm on {formula.fileN}: {GeneticAlgTime:.3f} seconds\n")
+            TotalTimesGenetic.append(GeneticAlgTime)
 
-AllTimesAndClauses = list(zip(ProportionClausesLocal, TotalTimesLocal, ProportionClausesGenetic, TotalTimesGenetic))
-n = len(ProportionClausesLocal)
-if not (len(TotalTimesLocal) == len(ProportionClausesGenetic) == len(TotalTimesGenetic) == n):
-    raise ValueError("All input lists must have the same length (one entry per formula).")
+            geneticBestCount = ClausesSatisfied(formula, GeneticAlgBest)
+            print(f"Proportion of clauses satisfied by Genetic Algorithm on {formula.fileN}: {geneticBestCount/formula.numClauses:.2f}\n")
+            ProportionClausesGenetic.append(geneticBestCount/formula.numClauses)
 
-# build the rows
-rows = []
-for i in range(n):
-    # Local Search row for formula i
-    rows.append({
-        "Formula": i,                      # number starting at 0
-        "Algorithm": "Local Search",
-        "Clauses Prop": ProportionClausesLocal[i],
-        "Time": TotalTimesLocal[i]
-    })
-    # Genetic row for formula i
-    rows.append({
-        "Formula": i,
-        "Algorithm": "Genetic",
-        "Clauses Prop": ProportionClausesGenetic[i],
-        "Time": TotalTimesGenetic[i]
-    })
+            print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}\n")
+            print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}\n")
+            FormulasCompleted.append(formula.fileN)
+            ClausesSatisfiedLocalSearchList.append(SATClass.ClausesSatisfied(formula, LocalSearchBest))
+            ClausesSatisfiedGeneticAlgList.append(SATClass.ClausesSatisfied(formula, GeneticAlgBest))
+        update_running_avg(ProportionClausesLocal, AverageClausesLocal, i)
+        update_running_avg(TotalTimesLocal, AverageTimeLocal, i)
+        update_running_avg(ProportionClausesGenetic, AverageClausesGenetic, i)
+        update_running_avg(TotalTimesGenetic, AverageTimeGenetic, i)
 
-# create DataFrame and save to CSV
-df = pd.DataFrame(rows, columns=["Formula", "Algorithm", "Clauses Prop", "Time"])
-df.to_csv("results_by_formula.csv", index=False)
+    n = len(TotalTimesLocal)
+    # build the rows
+    rows = []
+    for i in range(n):
+        # Local Search row for formula i
+        rows.append({
+            "Formula": i,                      # number starting at 0
+            "Algorithm": "Local Search",
+            "Clauses Prop": AverageClausesLocal[i],
+            "Time": AverageTimeLocal[i]
+        })
+        # Genetic row for formula i
+        rows.append({
+            "Formula": i,
+            "Algorithm": "Genetic",
+            "Clauses Prop": AverageClausesGenetic[i],
+            "Time": AverageTimeGenetic[i]
+        })
 
-print("Saved results_by_formula.csv with", len(df), "rows.")
-print(df)
+        rows.append({
+            "Formula": i,
+            "Algorithm": "DPLL",
+            "Clauses Prop": None,
+            "Time": dpllTimes[i]
+         })
 
+    # create DataFrame and save to CSV
+    df = pd.DataFrame(rows, columns=["Formula", "Algorithm", "Clauses Prop", "Time"])
+    df["Clauses Prop"] = df["Clauses Prop"].round(2)
+    df["Time"] = df["Time"].round(3)
+    df.to_csv("results_by_formula.csv", index=False)
+
+    print("Saved results_by_formula.csv with", len(df), "rows.")
+    print(df)
+
+main()
