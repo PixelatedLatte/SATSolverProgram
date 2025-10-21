@@ -7,7 +7,7 @@ import os
 import random
 import time
 import csv
-import numpy as np
+import pandas as pd
 from re import A
 from stringprep import in_table_a1
 from SATClass import *
@@ -125,31 +125,67 @@ crossover_amount = int(population_size / 3)
 FormulasCompleted = []
 ClausesSatisfiedLocalSearchList = []
 ClausesSatisfiedGeneticAlgList = []
-ProportionClauses = []
-totalTimes = []
-for formula in hard_formulas:
+ProportionClausesLocal = []
+ProportionClausesGenetic = []
+TotalTimesLocal = []
+TotalTimesGenetic = []
+for cnt, formula in enumerate(hard_formulas):
     startTime = time.time()
     LocalSearchBest = SATClass.LocalSearch(formula)
     endTime = time.time()
-    print(f"Time taken for Local Search on {formula.fileN}: {endTime - startTime:.3f} seconds")
-    totalTimes.append(endTime-startTime)
+    LocalSearchTime = endTime - startTime
+    print(f"Time taken for Local Search on {formula.fileN}: {LocalSearchTime:.3f} seconds")
+    TotalTimesLocal.append(LocalSearchTime)
 
     localBestCount = ClausesSatisfied(formula, LocalSearchBest)
-    print(f"Proportion of clauses satisfied by Local Search on {formula.fileN}: {localBestCount/formula.numClauses:.2f}")
-    ProportionClauses.append(localBestCount/formula.numClauses)
+    print(f"Proportion of clauses satisfied by Local Search on {formula.fileN}: {localBestCount/formula.numClauses:.2f}\n")
+    ProportionClausesLocal.append(localBestCount/formula.numClauses)
 
     startTime = time.time()
     GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount)
     endTime = time.time()
-    print(f"Time taken for Genetic Algorithm on {formula.fileN}: {endTime - startTime:.3f} seconds")
-    totalTimes.append(endTime-startTime)
+    GeneticAlgTime = endTime - startTime
+    print(f"Time taken for Genetic Algorithm on {formula.fileN}: {GeneticAlgTime:.3f} seconds\n")
+    TotalTimesGenetic.append(GeneticAlgTime)
 
     geneticBestCount = ClausesSatisfied(formula, GeneticAlgBest)
-    print(f"Proportion of clauses satisfied by Genetic Algorithm on {formula.fileN}: {geneticBestCount/formula.numClauses:.2f}")
+    print(f"Proportion of clauses satisfied by Genetic Algorithm on {formula.fileN}: {geneticBestCount/formula.numClauses:.2f}\n")
+    ProportionClausesGenetic.append(geneticBestCount/formula.numClauses)
 
-
-    print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}")
-    print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}")
+    print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}\n")
+    print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}\n")
     FormulasCompleted.append(formula.fileN)
     ClausesSatisfiedLocalSearchList.append(SATClass.ClausesSatisfied(formula, LocalSearchBest))
     ClausesSatisfiedGeneticAlgList.append(SATClass.ClausesSatisfied(formula, GeneticAlgBest))
+    break
+
+AllTimesAndClauses = list(zip(ProportionClausesLocal, TotalTimesLocal, ProportionClausesGenetic, TotalTimesGenetic))
+n = len(ProportionClausesLocal)
+if not (len(TotalTimesLocal) == len(ProportionClausesGenetic) == len(TotalTimesGenetic) == n):
+    raise ValueError("All input lists must have the same length (one entry per formula).")
+
+# build the rows
+rows = []
+for i in range(n):
+    # Local Search row for formula i
+    rows.append({
+        "Formula": i,                      # number starting at 0
+        "Algorithm": "Local Search",
+        "Clauses Prop": ProportionClausesLocal[i],
+        "Time": TotalTimesLocal[i]
+    })
+    # Genetic row for formula i
+    rows.append({
+        "Formula": i,
+        "Algorithm": "Genetic",
+        "Clauses Prop": ProportionClausesGenetic[i],
+        "Time": TotalTimesGenetic[i]
+    })
+
+# create DataFrame and save to CSV
+df = pd.DataFrame(rows, columns=["Formula", "Algorithm", "Clauses Prop", "Time"])
+df.to_csv("results_by_formula.csv", index=False)
+
+print("Saved results_by_formula.csv with", len(df), "rows.")
+print(df)
+
