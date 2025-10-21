@@ -79,9 +79,6 @@ def create_negation(formula):
     for clause in formula.clausesRaw:
         for i in range(len(clause)):
             clause[i] = abs(clause[i])
-
-
-
 assignments = {}
 easy_files = []
 hard_files = []
@@ -107,6 +104,7 @@ for formula in easy_formulas:
 for formula in hard_formulas:
     create_negation(formula)
 
+'''
 startTime = time.time()
 for formula in easy_formulas:
     print(f"Easy Formula: {formula.fileN}\n {formula.clausesOriginal}\n")
@@ -116,7 +114,7 @@ for formula in easy_formulas:
     print(f"Assignments: {assignments}")
 endTime = time.time()
 print(f"Time taken to create negations for hard formulas: {endTime - startTime} seconds")
-
+'''
 population_size = 100
 generations = 150
 # 1% chance for an assignement to mutate 1 bit, 1/3 of population will be culled each generation
@@ -126,8 +124,21 @@ FormulasCompleted = []
 ClausesSatisfiedLocalSearchList = []
 ClausesSatisfiedGeneticAlgList = []
 for formula in hard_formulas:
+    startTime = time.time()
     LocalSearchBest = SATClass.LocalSearch(formula)
+    endTime = time.time()
+    print(f"Time taken for Local Search on {formula.fileN}: {endTime - startTime:.3f} seconds")
+
+    localBestCount = ClausesSatisfied(formula, LocalSearchBest)
+    print(f"Proportion of clauses satisfied by Local Search on {formula.fileN}: {localBestCount/formula.numClauses:.2f}")
+
+    startTime = time.time()
     GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount)
+    endTime = time.time()
+    print(f"Time taken for Genetic Algorithm on {formula.fileN}: {endTime - startTime:.3f} seconds")
+
+    geneticBestCount = ClausesSatisfied(formula, GeneticAlgBest)
+    print(f"Proportion of clauses satisfied by Genetic Algorithm on {formula.fileN}: {geneticBestCount/formula.numClauses:.2f}")
 
     print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}")
     print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}")
