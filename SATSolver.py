@@ -106,7 +106,7 @@ for formula in easy_formulas:
 for formula in hard_formulas:
     create_negation(formula)
 
-'''
+
 startTime = time.time()
 for formula in easy_formulas:
     print(f"Easy Formula: {formula.fileN}\n {formula.clausesOriginal}\n")
@@ -116,7 +116,7 @@ for formula in easy_formulas:
     print(f"Assignments: {assignments}")
 endTime = time.time()
 print(f"Time taken to create negations for hard formulas: {endTime - startTime} seconds")
-'''
+
 population_size = 100
 generations = 150
 # 1% chance for an assignement to mutate 1 bit, 1/3 of population will be culled each generation

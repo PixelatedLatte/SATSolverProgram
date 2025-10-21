@@ -39,29 +39,51 @@ class Node:
 
 # dpll Algorithm using a stack instead of recursion, too many resources used when recurring too much
 def dpll(clauses, assignment):
+    def formula_fully_satisfied(clauses, assignment):
+        # Return True iff every clause has at least one literal satisfied by assignment.
+        for clause in clauses:
+            satisfied = False
+            for lit in clause:
+                var = abs(lit)
+                if var in assignment:
+                    val = assignment[var]
+                    if (lit > 0 and val) or (lit < 0 and not val):
+                        satisfied = True
+                        break
+            if not satisfied:
+                return False
+        return True
+
     stack = []
-    root = Node(None, clauses, assignment)
+    root = Node(None, [list(c) for c in clauses], {} if assignment is None else assignment.copy())
     stack.append(root)
 
     while stack:
         node = stack.pop()
-        clauses, assignment = node.clauses, node.assignment
+        # work on fresh copies to avoid shared mutation
+        clauses = [list(c) for c in node.clauses]
+        assignment = {} if node.assignment is None else node.assignment.copy()
 
         # Unit propagation
         clauses, assignment, isConflict = unitPropagation(clauses, assignment)
         if isConflict:
             continue  # Conflict, backtrack
 
-        if not clauses:
-            print("Found solution!!!")
-            return True, assignment  # Solution found
+        # If any empty clause exists -> conflict
+        if any(len(c) == 0 for c in clauses):
+            continue
 
+        # If every clause is satisfied by the current (possibly partial) assignment -> success
+        if formula_fully_satisfied(clauses, assignment):
+            return True, assignment
+
+        # Need to pick a variable to branch on
         literal = pickMostConstraining(clauses, assignment)
         if literal is None:
-            print("No assigned literals left here, backtracking...")
-            continue  # No unassigned literals, backtrack
+            # No unassigned variables appear in remaining clauses and formula wasn't fully satisfied -> treat as backtrack
+            continue
 
-        # Try literal = False first, so True is explored first
+        # Push False then True so True is popped/explored first
         new_assignment_false = assignment.copy()
         new_assignment_false[literal] = False
         stack.append(Node(node, simplify(clauses, -literal), new_assignment_false))
@@ -70,7 +92,6 @@ def dpll(clauses, assignment):
         new_assignment_true[literal] = True
         stack.append(Node(node, simplify(clauses, literal), new_assignment_true))
 
-    print("Did not find Solution...Conflict in all branches")
     return False, None  # GLOBAL unsatisfiability
 
 #Simplify all clauses in formula by removing clauses satisfied by literals
