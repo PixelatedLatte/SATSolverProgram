@@ -5,6 +5,7 @@ import copy
 import glob
 import os
 import random
+import time
 from re import A
 from stringprep import in_table_a1
 from SATClass import *
@@ -102,24 +103,19 @@ hard_formulas = read_cnf_files(hard_files)
 for formula in easy_formulas:
     create_negation(formula)
 
+
 for formula in hard_formulas:
     create_negation(formula)
 
-''' 
+startTime = time.time()
 for formula in easy_formulas:
     print(f"Easy Formula: {formula.fileN}\n {formula.clausesOriginal}\n")
 
     formula.clausesOriginal, assignments = dpll(formula.clausesOriginal, assignments)
 
     print(f"Assignments: {assignments}")
-'''
-'''
-print(
-    f"After unit propagation:\n{hard_formulas[7].clausesRaw}\n\n"
-    f"Assignments: {assignments}, Conflict: {is_conflict}"
-)
-'''
-
+endTime = time.time()
+print(f"Time taken to create negations for hard formulas: {endTime - startTime} seconds")
 
 population_size = 100
 generations = 150

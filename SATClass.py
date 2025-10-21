@@ -50,14 +50,13 @@ def dpll(clauses, assignment):
         # Unit propagation
         clauses, assignment, isConflict = unitPropagation(clauses, assignment)
         if isConflict:
-            print("Conflict in this branch, backtracking...")
             continue  # Conflict, backtrack
 
         if not clauses:
             print("Found solution!!!")
             return True, assignment  # Solution found
 
-        literal = pickMostConstrained(clauses, assignment)
+        literal = pickMostConstraining(clauses, assignment)
         if literal is None:
             print("No assigned literals left here, backtracking...")
             continue  # No unassigned literals, backtrack
@@ -95,23 +94,22 @@ def countLiteral(clauses):
     count = {}
     for clause in clauses:
         for lit in clause:
-            count[lit] = count.get(lit, 0) + 1
+            v = abs(lit)
+            count[v] = count.get(v, 0) + 1
     return count
 #Picks the most constraining unassigned literal that has not been chosen yet
-def pickMostConstrained(clauses, assignment):
+def pickMostConstraining(clauses, assignment):
     count = countLiteral(clauses)
 
     bestLit = None
     bestCount = -1
     for lit, cnt in count.items():
-        if abs(lit) in assignment:
+        if lit in assignment:
             continue # Literal already assigned
         if cnt > bestCount: # If found a better literal
             bestCount = cnt
-            bestLit = abs(lit)
-        if bestLit is not None: # If the best literal exists
-            return bestLit
-    return None  # All variables assigned
+            bestLit = lit
+    return bestLit # All variables assigned
 
 def unitPropagation(clauses, assignment):
     clauses = [list(clause) for clause in clauses]   # avoid mutating input
@@ -125,6 +123,11 @@ def unitPropagation(clauses, assignment):
 
         # Look for a unit clause or an immediate conflict
         for clause in clauses:
+            # tautology clause, skip it
+            s = set(clause)
+            if any(-lit in s for lit in s):
+                continue
+
             # If clause already satisfied by current assignment, skip it
             clause_satisfied = False
             for lit in clause:
@@ -138,14 +141,15 @@ def unitPropagation(clauses, assignment):
 
             # collect literals with unassigned variables
             unassigned_literals = [lit for lit in clause if abs(lit) not in assignment]
+            unique_unassigned = set(unassigned_literals)
 
             # If no unassigned literals and clause not satisfied -> conflict
-            if len(unassigned_literals) == 0:
+            if len(unique_unassigned) == 0:
                 return clauses, assignment, True
 
             # If exactly one unassigned literal -> unit clause
-            if len(unassigned_literals) == 1:
-                unit_clause_literal = unassigned_literals[0]
+            if len(unique_unassigned) == 1:
+                unit_clause_literal = next(iter(unique_unassigned))
                 break
 
         if unit_clause_literal is None:
