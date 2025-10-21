@@ -293,17 +293,15 @@ def GeneticAlgorithm(formula, population_size, generations, mutation_proportion,
             clauses_satisfied_group.append(numsatisfied)
 
         # Mutate some assignments in population
-        for j in range(len(population_group)):
-            bits = list(population_group[j])  # convert to list for mutability
-            for k in range(len(bits)):
-                if random.random() <= mutation_proportion:
-                    # Flip bit
-                    if individual[k] == "0":
-                        flipped = "1"
-                    else:
-                        flipped = "0"
-                    individual = individual[:k] + flipped + individual[k+1:]
-            population_group[j] = individual
+        for pos in range(len(population_group)):
+            if random.random() <= mutation_proportion:
+                mutatepos = random.randint(0,formula.numVars-1)
+                # Flip bit
+                if population_group[pos][mutatepos] == "0":
+                    flipped = "1"
+                else:
+                    flipped = "0"
+                population_group[pos] = population_group[pos][:mutatepos] + flipped + population_group[pos][mutatepos+1:]
             # Update clauses satisfied after mutation
             clauses_satisfied_group[j] = ClausesSatisfied(formula, population_group[j])
         

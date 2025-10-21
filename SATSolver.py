@@ -124,7 +124,7 @@ print(
 population_size = 100
 generations = 150
 # 1% chance for an assignement to mutate 1 bit, 1/3 of population will be culled each generation
-mutation_proportion = .01
+mutation_proportion = .02
 crossover_amount = int(population_size / 3)
 FormulasCompleted = []
 ClausesSatisfiedLocalSearchList = []
