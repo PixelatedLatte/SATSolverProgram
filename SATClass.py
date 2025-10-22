@@ -39,42 +39,25 @@ class Node:
 
 # dpll Algorithm using a stack instead of recursion, too many resources used when recurring too much
 def dpll(clauses, assignment):
-    def formula_fully_satisfied(clauses, assignment):
-        # Return True iff every clause has at least one literal satisfied by assignment.
-        for clause in clauses:
-            satisfied = False
-            for lit in clause:
-                var = abs(lit)
-                if var in assignment:
-                    val = assignment[var]
-                    if (lit > 0 and val) or (lit < 0 and not val):
-                        satisfied = True
-                        break
-            if not satisfied:
-                return False
-        return True
 
     stack = []
-    root = Node(None, [list(c) for c in clauses], {} if assignment is None else assignment.copy())
+    root = Node(None, clauses, assignment)
     stack.append(root)
 
     while stack:
         node = stack.pop()
         # work on fresh copies to avoid shared mutation
-        clauses = [list(c) for c in node.clauses]
-        assignment = {} if node.assignment is None else node.assignment.copy()
+        clauses = node.clauses
+        assignment = node.assignment
 
         # Unit propagation
         clauses, assignment, isConflict = unitPropagation(clauses, assignment)
         if isConflict:
             continue  # Conflict, backtrack
 
-        # If any empty clause exists -> conflict
-        if any(len(c) == 0 for c in clauses):
-            continue
-
         # If every clause is satisfied by the current (possibly partial) assignment -> success
-        if formula_fully_satisfied(clauses, assignment):
+        if not clauses:
+            print("Found Solution!!!")
             return True, assignment
 
         # Need to pick a variable to branch on
