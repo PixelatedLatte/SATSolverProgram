@@ -14,19 +14,15 @@ from SATClass import *
 import SATClass
 
 def load_cnf_files(folder_path, file_list):
-    """
-    Recursively search a folder for all .cnf files and append them to file_list.
-    """
+    # Search for all .cnf files in the specified folder and its subfolders (in github repo)
     for file_path in glob.glob(os.path.join(folder_path, '**', '*.cnf'), recursive=True):
         file_list.append(file_path)
-        #print(file_path)
     return file_list
 
 
 def read_cnf_files(file_list):
-    """
-    Read CNF files into File class objects and return a list of those objects.
-    """
+    #Read CNF files into File class objects and return a list of those objects.
+
     file_objects = []
 
     for file_path in file_list:
@@ -34,24 +30,20 @@ def read_cnf_files(file_list):
         with open(file_path, "r") as f:
             for line in f:
                 line = line.strip()
-
                 # Skip comments and empty lines
                 if not line or line.startswith('c'):
                     continue
-
-                # Parse the problem line
+                # Grab the p line data
                 if line.startswith('p'):
                     parts = line.split()
                     num_vars = int(parts[2])
                     num_clauses = int(parts[3])
                     continue
-
-                # Parse a clause line
+                # Grab a clause line (formatted as space-separated integers ending with 0)
                 clause = list(map(int, line.split()))
                 if clause[-1] == 0:
                     clause = clause[:-1]  # Remove the trailing 0
                 clauses.append(clause)
-
                 # Stop after reading all clauses listed in the header
                 if len(clauses) >= num_clauses:
                     break
@@ -62,7 +54,7 @@ def read_cnf_files(file_list):
         # creating original clauses copy for DPLL use
         original_clauses = copy.deepcopy(clauses)
 
-        # Build File object and add to list
+        # Build File object and add to list (This is our meat and taters) and append to array
         file_info = File(file_path, len(clauses), num_vars, clauses, negated_clauses, original_clauses)
         file_objects.append(file_info)
 
@@ -71,6 +63,8 @@ def read_cnf_files(file_list):
     return file_objects
 
 def create_negation(formula):
+    # Create the negation of the formula by flipping the literals in each clause ([1,-2,3] becomes [1,2,3] and [1,0,1])])
+    # Will also convert all literals to their absolute values for easier processing later (makes it easier to grab variable)
     formula.clausesNegation = copy.deepcopy(formula.clausesRaw)
     for clause in formula.clausesNegation:
             for i in range(len(clause)):
@@ -81,15 +75,7 @@ def create_negation(formula):
     for clause in formula.clausesRaw:
         for i in range(len(clause)):
             clause[i] = abs(clause[i])
-'''
-def average(runTimeClause, averageTimeClause):
-    if averageTimeClause == []:
-        for i in range(len(runTimeClause)-1):
-            averageTimeClause.append(runTimeClause[i])
-    else:
-        for i in range(len(runTimeClause)-1):
-            averageTimeClause[i] = (averageTimeClause[i] + runTimeClause[i]) / 2
-'''
+
 def update_running_avg(run, avg, run_index):
     # run_index: number of previous runs already included (0-based)
     for i, v in enumerate(run):
@@ -98,6 +84,7 @@ def update_running_avg(run, avg, run_index):
         else:
             avg[i] = (avg[i] * run_index + v) / (run_index + 1)
 def main():
+    # initialize variables
     assignments = {}
     easy_files = []
     hard_files = []
@@ -118,8 +105,6 @@ def main():
     # Create negations of the formulas
     for formula in easy_formulas:
         create_negation(formula)
-
-
     for formula in hard_formulas:
         create_negation(formula)
 
@@ -136,11 +121,14 @@ def main():
         print(f"Time to solve {formula.fileN} using DPLL: {endTime - startTime} seconds\n")
         dpllTimes.append(endTime-startTime)
 
+    # Genetic alg initializers
     population_size = 100
     generations = 150
     # 1% chance for an assignement to mutate 1 bit, 1/3 of population will be culled each generation
     mutation_proportion = .02
     crossover_amount = int(population_size / 3)
+
+    # Creates lists to hold average results + times
     FormulasCompleted = []
     ClausesSatisfiedLocalSearchList = []
     ClausesSatisfiedGeneticAlgList = []

@@ -12,8 +12,10 @@ from stringprep import in_table_a1
     File Class:
         fileN: Name of the file
         numClauses: Number of clauses in the file
+        numVars: Number of variables in the file
         clausesRaw: Clauses as they are in the file
         clausesNegation: Negated clauses for DPLL algorithm
+        clausesOriginal: Original clauses for reference (used in DPLL)
 '''
 class File:
     def __init__(self, fileN, numClauses, numVars, clausesRaw, clausesNegation, clausesOriginal):
