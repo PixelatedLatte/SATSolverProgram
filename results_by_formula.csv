@@ -1,901 +1,901 @@
 Formula,Algorithm,Clauses Prop,Time
-0,Local Search,0.98,0.253
-0,Genetic,0.98,4.733
-0,DPLL,,2.026
-1,Local Search,0.98,0.238
-1,Genetic,0.98,4.744
+0,Local Search,0.9741,0.1851
+0,Genetic,0.978,4.2012
+0,DPLL,,1.8625
+1,Local Search,0.9785,0.2153
+1,Genetic,0.9839,4.2528
 1,DPLL,,0.0
-2,Local Search,0.98,0.225
-2,Genetic,0.98,4.728
-2,DPLL,,1.393
-3,Local Search,0.98,0.235
-3,Genetic,0.99,4.655
+2,Local Search,0.9824,0.2146
+2,Genetic,0.9824,4.3089
+2,DPLL,,1.2826
+3,Local Search,0.9785,0.1979
+3,Genetic,0.981,4.2376
 3,DPLL,,0.0
-4,Local Search,0.98,0.211
-4,Genetic,0.99,4.708
-4,DPLL,,4.234
-5,Local Search,0.97,0.216
-5,Genetic,0.98,4.729
-5,DPLL,,0.0
-6,Local Search,0.98,0.25
-6,Genetic,0.98,4.774
-6,DPLL,,0.152
-7,Local Search,0.98,0.251
-7,Genetic,0.98,4.849
-7,DPLL,,0.001
-8,Local Search,0.98,0.245
-8,Genetic,0.98,4.817
-8,DPLL,,1.337
-9,Local Search,0.98,0.238
-9,Genetic,0.98,4.84
-9,DPLL,,0.002
-10,Local Search,0.98,0.228
-10,Genetic,0.98,4.837
-10,DPLL,,0.305
-11,Local Search,0.98,0.268
-11,Genetic,0.98,4.83
+4,Local Search,0.9776,0.217
+4,Genetic,0.9834,4.2656
+4,DPLL,,3.8078
+5,Local Search,0.9707,0.2125
+5,Genetic,0.9785,4.2458
+5,DPLL,,0.001
+6,Local Search,0.978,0.208
+6,Genetic,0.9751,4.2753
+6,DPLL,,0.1401
+7,Local Search,0.9737,0.1978
+7,Genetic,0.9829,4.2831
+7,DPLL,,0.0
+8,Local Search,0.981,0.1953
+8,Genetic,0.9844,4.2699
+8,DPLL,,1.178
+9,Local Search,0.9829,0.2177
+9,Genetic,0.982,4.1696
+9,DPLL,,0.0007
+10,Local Search,0.9756,0.2008
+10,Genetic,0.9863,4.2148
+10,DPLL,,0.2714
+11,Local Search,0.979,0.2161
+11,Genetic,0.9785,4.1864
 11,DPLL,,0.0
-12,Local Search,0.98,0.211
-12,Genetic,0.98,4.969
-12,DPLL,,1.676
-13,Local Search,0.98,0.229
-13,Genetic,0.98,4.909
+12,Local Search,0.9795,0.23
+12,Genetic,0.9829,4.1873
+12,DPLL,,1.5743
+13,Local Search,0.9751,0.1765
+13,Genetic,0.9805,4.1743
 13,DPLL,,0.0
-14,Local Search,0.98,0.245
-14,Genetic,0.98,4.907
-14,DPLL,,0.087
-15,Local Search,0.98,0.223
-15,Genetic,0.98,4.925
+14,Local Search,0.9683,0.1848
+14,Genetic,0.981,4.1798
+14,DPLL,,0.0787
+15,Local Search,0.9824,0.2114
+15,Genetic,0.9839,4.1927
 15,DPLL,,0.0
-16,Local Search,0.97,0.238
-16,Genetic,0.98,4.83
-16,DPLL,,2.091
-17,Local Search,0.97,0.202
-17,Genetic,0.97,4.827
-17,DPLL,,0.002
-18,Local Search,0.98,0.238
-18,Genetic,0.98,4.809
-18,DPLL,,0.335
-19,Local Search,0.97,0.214
-19,Genetic,0.98,4.844
+16,Local Search,0.9785,0.2009
+16,Genetic,0.98,4.2313
+16,DPLL,,1.9357
+17,Local Search,0.9712,0.1746
+17,Genetic,0.9766,4.2208
+17,DPLL,,0.0
+18,Local Search,0.9849,0.2562
+18,Genetic,0.9878,4.2245
+18,DPLL,,0.2997
+19,Local Search,0.9756,0.2132
+19,Genetic,0.9844,4.2124
 19,DPLL,,0.0
-20,Local Search,0.98,0.229
-20,Genetic,0.98,4.882
-20,DPLL,,4.365
-21,Local Search,0.98,0.248
-21,Genetic,0.98,4.797
-21,DPLL,,0.0
-22,Local Search,0.98,0.262
-22,Genetic,0.98,4.756
-22,DPLL,,0.216
-23,Local Search,0.97,0.228
-23,Genetic,0.98,4.755
+20,Local Search,0.9727,0.2034
+20,Genetic,0.9844,4.1684
+20,DPLL,,3.9282
+21,Local Search,0.9746,0.2084
+21,Genetic,0.981,4.2227
+21,DPLL,,0.03
+22,Local Search,0.9776,0.1898
+22,Genetic,0.9815,4.2392
+22,DPLL,,0.2206
+23,Local Search,0.9732,0.2133
+23,Genetic,0.98,4.161
 23,DPLL,,0.0
-24,Local Search,0.98,0.239
-24,Genetic,0.98,4.878
-24,DPLL,,0.041
-25,Local Search,0.97,0.186
-25,Genetic,0.98,4.78
-25,DPLL,,0.002
-26,Local Search,0.97,0.236
-26,Genetic,0.98,4.823
-26,DPLL,,4.751
-27,Local Search,0.97,0.239
-27,Genetic,0.98,4.786
-27,DPLL,,2.508
-28,Local Search,0.98,0.25
-28,Genetic,0.98,4.843
-28,DPLL,,0.0
-29,Local Search,0.97,0.215
-29,Genetic,0.98,4.849
-29,DPLL,,2.311
-30,Local Search,0.97,0.205
-30,Genetic,0.98,4.829
-30,DPLL,,0.001
-31,Local Search,0.98,0.228
-31,Genetic,0.98,4.864
-31,DPLL,,0.373
-32,Local Search,0.98,0.255
-32,Genetic,0.99,4.844
-32,DPLL,,0.0
-33,Local Search,0.98,0.226
-33,Genetic,0.98,4.915
-33,DPLL,,0.467
-34,Local Search,0.98,0.219
-34,Genetic,0.98,4.889
+24,Local Search,0.9829,0.2202
+24,Genetic,0.9839,4.1695
+24,DPLL,,0.0391
+25,Local Search,0.9722,0.1942
+25,Genetic,0.9771,4.2849
+25,DPLL,,0.0009
+26,Local Search,0.9756,0.2148
+26,Genetic,0.9751,4.48
+26,DPLL,,4.2549
+27,Local Search,0.9707,0.384
+27,Genetic,0.9741,5.6584
+27,DPLL,,2.3746
+28,Local Search,0.9771,0.1854
+28,Genetic,0.9844,4.4855
+28,DPLL,,0.0004
+29,Local Search,0.9737,0.1976
+29,Genetic,0.9815,4.2415
+29,DPLL,,2.0569
+30,Local Search,0.9785,0.1934
+30,Genetic,0.9805,4.2316
+30,DPLL,,0.0
+31,Local Search,0.978,0.1859
+31,Genetic,0.981,4.2994
+31,DPLL,,0.3687
+32,Local Search,0.9824,0.2007
+32,Genetic,0.9795,4.3184
+32,DPLL,,0.0006
+33,Local Search,0.9746,0.2242
+33,Genetic,0.98,4.3411
+33,DPLL,,0.4271
+34,Local Search,0.9771,0.1955
+34,Genetic,0.9844,4.2139
 34,DPLL,,0.0
-35,Local Search,0.97,0.243
-35,Genetic,0.98,4.924
-35,DPLL,,2.758
-36,Local Search,0.98,0.218
-36,Genetic,0.98,4.965
-36,DPLL,,0.769
-37,Local Search,0.97,0.222
-37,Genetic,0.98,4.886
-37,DPLL,,0.002
-38,Local Search,0.97,0.234
-38,Genetic,0.98,4.866
-38,DPLL,,0.823
-39,Local Search,0.98,0.219
-39,Genetic,0.98,4.9
-39,DPLL,,0.0
-40,Local Search,0.98,0.233
-40,Genetic,0.98,4.855
-40,DPLL,,2.018
-41,Local Search,0.97,0.24
-41,Genetic,0.98,4.899
+35,Local Search,0.9737,0.2278
+35,Genetic,0.9727,4.3149
+35,DPLL,,2.4612
+36,Local Search,0.9737,0.2226
+36,Genetic,0.9795,4.2662
+36,DPLL,,0.7333
+37,Local Search,0.979,0.1722
+37,Genetic,0.9839,4.2082
+37,DPLL,,0.0
+38,Local Search,0.981,0.2228
+38,Genetic,0.981,4.2388
+38,DPLL,,0.7106
+39,Local Search,0.9741,0.2425
+39,Genetic,0.9785,4.3295
+39,DPLL,,0.002
+40,Local Search,0.9707,0.185
+40,Genetic,0.9805,4.2741
+40,DPLL,,1.7905
+41,Local Search,0.981,0.2533
+41,Genetic,0.9834,4.2835
 41,DPLL,,0.0
-42,Local Search,0.98,0.227
-42,Genetic,0.98,4.88
-42,DPLL,,0.106
-43,Local Search,0.98,0.216
-43,Genetic,0.98,4.848
-43,DPLL,,0.001
-44,Local Search,0.98,0.21
-44,Genetic,0.98,4.897
-44,DPLL,,4.018
-45,Local Search,0.98,0.263
-45,Genetic,0.99,4.813
+42,Local Search,0.9683,0.1517
+42,Genetic,0.9771,4.3156
+42,DPLL,,0.0914
+43,Local Search,0.9737,0.2142
+43,Genetic,0.9829,4.3588
+43,DPLL,,0.0
+44,Local Search,0.9737,0.2107
+44,Genetic,0.9795,4.3312
+44,DPLL,,3.6175
+45,Local Search,0.9815,0.2138
+45,Genetic,0.9805,4.5059
 45,DPLL,,0.0
-46,Local Search,0.98,0.227
-46,Genetic,0.99,4.843
-46,DPLL,,1.81
-47,Local Search,0.98,0.239
-47,Genetic,0.99,4.836
-47,DPLL,,0.458
-48,Local Search,0.98,0.221
-48,Genetic,0.98,4.84
-48,DPLL,,0.002
-49,Local Search,0.98,0.207
-49,Genetic,0.98,4.779
-49,DPLL,,1.178
-50,Local Search,0.98,0.264
-50,Genetic,0.98,4.95
+46,Local Search,0.9746,0.2487
+46,Genetic,0.9805,5.7623
+46,DPLL,,1.6127
+47,Local Search,0.981,0.3024
+47,Genetic,0.9898,6.4056
+47,DPLL,,0.4584
+48,Local Search,0.9829,0.3792
+48,Genetic,0.979,6.2893
+48,DPLL,,0.0
+49,Local Search,0.9746,0.3529
+49,Genetic,0.9785,7.7682
+49,DPLL,,1.0501
+50,Local Search,0.9767,0.228
+50,Genetic,0.9795,8.9055
 50,DPLL,,0.001
-51,Local Search,0.98,0.229
-51,Genetic,0.98,4.885
-51,DPLL,,0.88
-52,Local Search,0.98,0.232
-52,Genetic,0.98,4.92
-52,DPLL,,0.002
-53,Local Search,0.98,0.252
-53,Genetic,0.98,4.976
-53,DPLL,,0.552
-54,Local Search,0.98,0.219
-54,Genetic,0.97,4.926
-54,DPLL,,0.0
-55,Local Search,0.98,0.239
-55,Genetic,0.98,4.917
-55,DPLL,,3.895
-56,Local Search,0.97,0.235
-56,Genetic,0.98,4.976
-56,DPLL,,0.001
-57,Local Search,0.98,0.24
-57,Genetic,0.98,5.009
-57,DPLL,,7.424
-58,Local Search,0.98,0.251
-58,Genetic,0.98,4.943
+51,Local Search,0.9833,0.5086
+51,Genetic,0.9857,7.8136
+51,DPLL,,0.7754
+52,Local Search,0.98,0.2838
+52,Genetic,0.9848,5.857
+52,DPLL,,0.0
+53,Local Search,0.9833,0.2329
+53,Genetic,0.9824,4.3485
+53,DPLL,,0.4953
+54,Local Search,0.971,0.2133
+54,Genetic,0.9714,4.3211
+54,DPLL,,0.0011
+55,Local Search,0.9767,0.2075
+55,Genetic,0.9795,4.3667
+55,DPLL,,3.5285
+56,Local Search,0.9776,0.225
+56,Genetic,0.9829,4.3412
+56,DPLL,,0.0016
+57,Local Search,0.9719,0.1876
+57,Genetic,0.979,4.2865
+57,DPLL,,6.8327
+58,Local Search,0.9767,0.1731
+58,Genetic,0.9814,4.3812
 58,DPLL,,0.0
-59,Local Search,0.97,0.212
-59,Genetic,0.98,4.982
-59,DPLL,,3.281
-60,Local Search,0.97,0.211
-60,Genetic,0.98,4.92
-60,DPLL,,3.855
-61,Local Search,0.98,0.237
-61,Genetic,0.98,4.943
-61,DPLL,,5.807
-62,Local Search,0.97,0.216
-62,Genetic,0.98,4.97
-62,DPLL,,0.0
-63,Local Search,0.97,0.204
-63,Genetic,0.98,4.918
-63,DPLL,,0.852
-64,Local Search,0.98,0.202
-64,Genetic,0.98,4.957
-64,DPLL,,0.0
-65,Local Search,0.97,0.234
-65,Genetic,0.98,4.976
-65,DPLL,,2.418
-66,Local Search,0.98,0.266
-66,Genetic,0.98,4.989
-66,DPLL,,0.413
-67,Local Search,0.97,0.24
-67,Genetic,0.98,4.99
-67,DPLL,,0.001
-68,Local Search,0.97,0.232
-68,Genetic,0.98,5.022
-68,DPLL,,4.166
-69,Local Search,0.97,0.254
-69,Genetic,0.97,4.994
-69,DPLL,,0.567
-70,Local Search,0.98,0.233
-70,Genetic,0.98,5.02
-70,DPLL,,0.0
-71,Local Search,0.98,0.242
-71,Genetic,0.98,5.029
-71,DPLL,,2.485
-72,Local Search,0.97,0.22
-72,Genetic,0.98,5.024
-72,DPLL,,0.001
-73,Local Search,0.97,0.255
-73,Genetic,0.98,5.071
-73,DPLL,,0.524
-74,Local Search,0.97,0.249
-74,Genetic,0.98,5.019
+59,Local Search,0.9714,0.188
+59,Genetic,0.9719,4.4443
+59,DPLL,,2.9569
+60,Local Search,0.9748,0.2022
+60,Genetic,0.9776,4.4271
+60,DPLL,,3.589
+61,Local Search,0.9776,0.2033
+61,Genetic,0.9776,4.3691
+61,DPLL,,5.4624
+62,Local Search,0.9786,0.1917
+62,Genetic,0.9876,4.4486
+62,DPLL,,0.001
+63,Local Search,0.9757,0.2265
+63,Genetic,0.9805,4.3246
+63,DPLL,,0.76
+64,Local Search,0.9767,0.1968
+64,Genetic,0.981,4.351
+64,DPLL,,0.0006
+65,Local Search,0.9738,0.189
+65,Genetic,0.9738,5.1482
+65,DPLL,,2.1787
+66,Local Search,0.9705,0.1906
+66,Genetic,0.9829,4.2983
+66,DPLL,,0.367
+67,Local Search,0.9738,0.2019
+67,Genetic,0.9824,4.3124
+67,DPLL,,0.0014
+68,Local Search,0.9757,0.2004
+68,Genetic,0.9776,4.352
+68,DPLL,,3.704
+69,Local Search,0.9752,0.2354
+69,Genetic,0.9743,4.2884
+69,DPLL,,0.5498
+70,Local Search,0.9724,0.1971
+70,Genetic,0.9786,4.2847
+70,DPLL,,0.0007
+71,Local Search,0.9762,0.1985
+71,Genetic,0.9833,4.3052
+71,DPLL,,2.1835
+72,Local Search,0.9733,0.2299
+72,Genetic,0.9771,4.3977
+72,DPLL,,0.0
+73,Local Search,0.9748,0.1966
+73,Genetic,0.9814,4.376
+73,DPLL,,0.479
+74,Local Search,0.9733,0.2141
+74,Genetic,0.98,6.021
 74,DPLL,,0.0
-75,Local Search,0.98,0.261
-75,Genetic,0.98,4.995
-75,DPLL,,1.051
-76,Local Search,0.98,0.239
-76,Genetic,0.98,4.978
-76,DPLL,,0.002
-77,Local Search,0.98,0.25
-77,Genetic,0.98,4.995
-77,DPLL,,0.084
-78,Local Search,0.97,0.217
-78,Genetic,0.98,4.975
-78,DPLL,,0.0
-79,Local Search,0.98,0.251
-79,Genetic,0.99,4.975
-79,DPLL,,0.061
-80,Local Search,0.98,0.25
-80,Genetic,0.98,5.006
-80,DPLL,,0.0
-81,Local Search,0.98,0.251
-81,Genetic,0.98,4.97
-81,DPLL,,0.207
-82,Local Search,0.98,0.259
-82,Genetic,0.99,5.019
-82,DPLL,,0.002
-83,Local Search,0.97,0.285
-83,Genetic,0.98,5.021
-83,DPLL,,8.64
-84,Local Search,0.97,0.231
-84,Genetic,0.98,4.987
-84,DPLL,,0.267
-85,Local Search,0.98,0.235
-85,Genetic,0.98,5.096
-85,DPLL,,0.0
-86,Local Search,0.97,0.236
-86,Genetic,0.98,5.037
-86,DPLL,,2.55
-87,Local Search,0.97,0.247
-87,Genetic,0.98,4.997
-87,DPLL,,5.673
-88,Local Search,0.97,0.247
-88,Genetic,0.98,5.068
-88,DPLL,,2.56
-89,Local Search,0.97,0.268
-89,Genetic,0.98,5.107
-89,DPLL,,0.002
-90,Local Search,0.97,0.232
-90,Genetic,0.98,5.126
-90,DPLL,,4.279
-91,Local Search,0.97,0.277
-91,Genetic,0.98,5.079
-91,DPLL,,2.832
-92,Local Search,0.97,0.209
-92,Genetic,0.98,5.171
-92,DPLL,,4.895
-93,Local Search,0.98,0.221
-93,Genetic,0.98,5.138
-93,DPLL,,2.767
-94,Local Search,0.98,0.235
-94,Genetic,0.98,5.168
+75,Local Search,0.98,0.3701
+75,Genetic,0.9833,6.1921
+75,DPLL,,0.9165
+76,Local Search,0.979,0.3472
+76,Genetic,0.9814,6.6302
+76,DPLL,,0.0005
+77,Local Search,0.9748,0.3518
+77,Genetic,0.9814,6.8016
+77,DPLL,,0.1058
+78,Local Search,0.9786,0.4039
+78,Genetic,0.9771,8.3767
+78,DPLL,,0.0009
+79,Local Search,0.9786,0.3833
+79,Genetic,0.9852,10.0587
+79,DPLL,,0.0546
+80,Local Search,0.9771,0.4444
+80,Genetic,0.9776,6.1926
+80,DPLL,,0.001
+81,Local Search,0.9781,0.3062
+81,Genetic,0.9886,6.1854
+81,DPLL,,0.1801
+82,Local Search,0.9805,0.2627
+82,Genetic,0.9848,6.5568
+82,DPLL,,0.0
+83,Local Search,0.9724,0.279
+83,Genetic,0.9762,6.737
+83,DPLL,,7.7235
+84,Local Search,0.9738,0.4726
+84,Genetic,0.9748,9.0569
+84,DPLL,,0.2536
+85,Local Search,0.9771,0.3237
+85,Genetic,0.9786,5.7604
+85,DPLL,,0.0012
+86,Local Search,0.98,0.2858
+86,Genetic,0.9786,5.7335
+86,DPLL,,2.3094
+87,Local Search,0.9719,0.3054
+87,Genetic,0.9771,6.1793
+87,DPLL,,5.0527
+88,Local Search,0.9724,0.2217
+88,Genetic,0.9786,6.1263
+88,DPLL,,2.2969
+89,Local Search,0.971,0.3815
+89,Genetic,0.9786,6.8934
+89,DPLL,,0.001
+90,Local Search,0.9752,0.4139
+90,Genetic,0.979,6.4507
+90,DPLL,,3.7917
+91,Local Search,0.9762,0.3297
+91,Genetic,0.98,5.2475
+91,DPLL,,2.6603
+92,Local Search,0.9814,0.2794
+92,Genetic,0.981,7.1362
+92,DPLL,,4.5572
+93,Local Search,0.981,0.7058
+93,Genetic,0.9857,9.4112
+93,DPLL,,2.4863
+94,Local Search,0.9795,0.3883
+94,Genetic,0.9786,7.1696
 94,DPLL,,0.0
-95,Local Search,0.97,0.202
-95,Genetic,0.98,5.126
-95,DPLL,,4.05
-96,Local Search,0.98,0.227
-96,Genetic,0.98,5.14
-96,DPLL,,0.345
-97,Local Search,0.98,0.241
-97,Genetic,0.98,5.108
-97,DPLL,,0.0
-98,Local Search,0.98,0.277
-98,Genetic,0.98,5.003
-98,DPLL,,6.979
-99,Local Search,0.98,0.229
-99,Genetic,0.98,5.076
+95,Local Search,0.9676,0.3469
+95,Genetic,0.9752,6.613
+95,DPLL,,3.5733
+96,Local Search,0.9724,0.209
+96,Genetic,0.9776,6.9182
+96,DPLL,,0.375
+97,Local Search,0.9771,0.3517
+97,Genetic,0.9814,6.9755
+97,DPLL,,0.0099
+98,Local Search,0.9781,0.2033
+98,Genetic,0.9819,9.0678
+98,DPLL,,6.2138
+99,Local Search,0.9733,0.3127
+99,Genetic,0.9762,5.6263
 99,DPLL,,0.0
-100,Local Search,0.97,0.264
-100,Genetic,0.99,5.153
-100,DPLL,,2.461
-101,Local Search,0.98,0.285
-101,Genetic,0.98,5.238
-101,DPLL,,4.515
-102,Local Search,0.97,0.234
-102,Genetic,0.98,5.229
-102,DPLL,,0.0
-103,Local Search,0.97,0.269
-103,Genetic,0.98,5.162
-103,DPLL,,2.539
-104,Local Search,0.97,0.21
-104,Genetic,0.98,5.379
-104,DPLL,,7.241
-105,Local Search,0.98,0.247
-105,Genetic,0.98,5.329
-105,DPLL,,4.194
-106,Local Search,0.98,0.262
-106,Genetic,0.98,5.331
-106,DPLL,,4.424
-107,Local Search,0.98,0.241
-107,Genetic,0.98,5.326
-107,DPLL,,0.001
-108,Local Search,0.98,0.262
-108,Genetic,0.98,5.332
-108,DPLL,,1.068
-109,Local Search,0.98,0.256
-109,Genetic,0.98,5.39
-109,DPLL,,0.002
-110,Local Search,0.98,0.273
-110,Genetic,0.98,5.365
-110,DPLL,,4.164
-111,Local Search,0.97,0.259
-111,Genetic,0.98,5.368
-111,DPLL,,2.26
-112,Local Search,0.97,0.256
-112,Genetic,0.98,5.281
+100,Local Search,0.9721,0.2851
+100,Genetic,0.9833,6.7877
+100,DPLL,,2.1545
+101,Local Search,0.9772,0.3205
+101,Genetic,0.9819,7.156
+101,DPLL,,4.3206
+102,Local Search,0.9809,0.4404
+102,Genetic,0.98,7.2249
+102,DPLL,,0.0011
+103,Local Search,0.9707,0.4753
+103,Genetic,0.9791,6.8521
+103,DPLL,,2.1946
+104,Local Search,0.9647,0.2139
+104,Genetic,0.9721,8.419
+104,DPLL,,6.783
+105,Local Search,0.9726,0.3832
+105,Genetic,0.98,6.8266
+105,DPLL,,3.7701
+106,Local Search,0.973,0.3203
+106,Genetic,0.9786,7.8396
+106,DPLL,,4.0374
+107,Local Search,0.9791,0.3139
+107,Genetic,0.9823,6.1186
+107,DPLL,,0.0
+108,Local Search,0.9753,0.207
+108,Genetic,0.9833,4.4636
+108,DPLL,,0.9828
+109,Local Search,0.974,0.2372
+109,Genetic,0.9758,4.5287
+109,DPLL,,0.0013
+110,Local Search,0.9744,0.2179
+110,Genetic,0.9809,4.5606
+110,DPLL,,3.7476
+111,Local Search,0.9786,0.2424
+111,Genetic,0.9749,4.4548
+111,DPLL,,1.9958
+112,Local Search,0.9753,0.2447
+112,Genetic,0.9753,4.5286
 112,DPLL,,0.0
-113,Local Search,0.97,0.263
-113,Genetic,0.98,5.351
-113,DPLL,,5.43
-114,Local Search,0.97,0.219
-114,Genetic,0.98,5.303
-114,DPLL,,2.162
-115,Local Search,0.98,0.253
-115,Genetic,0.98,5.237
-115,DPLL,,0.0
-116,Local Search,0.98,0.302
-116,Genetic,0.98,5.224
-116,DPLL,,2.336
-117,Local Search,0.98,0.26
-117,Genetic,0.98,5.207
-117,DPLL,,0.002
-118,Local Search,0.98,0.279
-118,Genetic,0.98,5.229
-118,DPLL,,0.203
-119,Local Search,0.98,0.328
-119,Genetic,0.98,5.263
-119,DPLL,,0.0
-120,Local Search,0.98,0.261
-120,Genetic,0.98,5.239
-120,DPLL,,8.35
-121,Local Search,0.97,0.22
-121,Genetic,0.98,5.23
-121,DPLL,,0.187
-122,Local Search,0.97,0.274
-122,Genetic,0.98,5.293
-122,DPLL,,0.0
-123,Local Search,0.98,0.284
-123,Genetic,0.98,5.298
-123,DPLL,,0.557
-124,Local Search,0.98,0.262
-124,Genetic,0.98,5.353
-124,DPLL,,0.001
-125,Local Search,0.98,0.256
-125,Genetic,0.98,5.287
-125,DPLL,,3.24
-126,Local Search,0.97,0.283
-126,Genetic,0.98,5.338
-126,DPLL,,0.002
-127,Local Search,0.98,0.266
-127,Genetic,0.98,5.327
-127,DPLL,,0.708
-128,Local Search,0.98,0.27
-128,Genetic,0.98,5.286
-128,DPLL,,0.001
-129,Local Search,0.97,0.241
-129,Genetic,0.98,5.259
-129,DPLL,,4.068
-130,Local Search,0.97,0.244
-130,Genetic,0.98,5.251
-130,DPLL,,2.325
-131,Local Search,0.98,0.285
-131,Genetic,0.98,5.253
+113,Local Search,0.9735,0.2483
+113,Genetic,0.9753,4.5674
+113,DPLL,,4.7847
+114,Local Search,0.9735,0.1966
+114,Genetic,0.9833,4.624
+114,DPLL,,1.8341
+115,Local Search,0.9791,0.2819
+115,Genetic,0.9809,4.5448
+115,DPLL,,0.0012
+116,Local Search,0.9828,0.2121
+116,Genetic,0.9856,4.6697
+116,DPLL,,2.0127
+117,Local Search,0.9772,0.2788
+117,Genetic,0.9856,4.6908
+117,DPLL,,0.0
+118,Local Search,0.9777,0.2573
+118,Genetic,0.9833,4.6668
+118,DPLL,,0.2098
+119,Local Search,0.9698,0.2427
+119,Genetic,0.9847,4.5707
+119,DPLL,,0.001
+120,Local Search,0.9744,0.2102
+120,Genetic,0.9833,4.5588
+120,DPLL,,7.2309
+121,Local Search,0.9735,0.213
+121,Genetic,0.9809,4.6517
+121,DPLL,,0.173
+122,Local Search,0.9674,0.2247
+122,Genetic,0.9772,4.5971
+122,DPLL,,0.0029
+123,Local Search,0.9767,0.2312
+123,Genetic,0.9819,4.555
+123,DPLL,,0.5477
+124,Local Search,0.9758,0.2418
+124,Genetic,0.9767,4.6448
+124,DPLL,,0.007
+125,Local Search,0.9781,0.2257
+125,Genetic,0.9772,4.536
+125,DPLL,,2.7586
+126,Local Search,0.973,0.2044
+126,Genetic,0.9805,4.5561
+126,DPLL,,0.004
+127,Local Search,0.9809,0.257
+127,Genetic,0.9828,5.8086
+127,DPLL,,0.6189
+128,Local Search,0.9814,0.3794
+128,Genetic,0.9856,7.425
+128,DPLL,,0.0009
+129,Local Search,0.9749,0.3107
+129,Genetic,0.9763,6.8899
+129,DPLL,,3.471
+130,Local Search,0.9702,0.2277
+130,Genetic,0.9791,6.7264
+130,DPLL,,2.0636
+131,Local Search,0.9702,0.3157
+131,Genetic,0.9791,6.7995
 131,DPLL,,0.0
-132,Local Search,0.97,0.266
-132,Genetic,0.98,5.271
-132,DPLL,,6.715
-133,Local Search,0.98,0.244
-133,Genetic,0.98,5.211
-133,DPLL,,2.441
-134,Local Search,0.97,0.267
-134,Genetic,0.98,5.142
-134,DPLL,,0.785
-135,Local Search,0.98,0.246
-135,Genetic,0.98,5.214
-135,DPLL,,0.001
-136,Local Search,0.98,0.233
-136,Genetic,0.97,5.247
-136,DPLL,,2.211
-137,Local Search,0.98,0.241
-137,Genetic,0.99,5.167
-137,DPLL,,0.114
-138,Local Search,0.97,0.271
-138,Genetic,0.98,5.113
+132,Local Search,0.9726,0.3176
+132,Genetic,0.9767,6.468
+132,DPLL,,5.6629
+133,Local Search,0.9786,0.3852
+133,Genetic,0.9781,8.8636
+133,DPLL,,2.0994
+134,Local Search,0.9735,0.4635
+134,Genetic,0.9777,9.83
+134,DPLL,,0.6639
+135,Local Search,0.9688,0.4743
+135,Genetic,0.9795,8.6215
+135,DPLL,,0.0
+136,Local Search,0.9805,0.5285
+136,Genetic,0.9772,8.526
+136,DPLL,,1.8723
+137,Local Search,0.9767,0.42
+137,Genetic,0.9814,7.0552
+137,DPLL,,0.0921
+138,Local Search,0.9698,0.4445
+138,Genetic,0.986,7.0581
 138,DPLL,,0.0
-139,Local Search,0.97,0.235
-139,Genetic,0.98,5.083
-139,DPLL,,2.144
-140,Local Search,0.98,0.252
-140,Genetic,0.98,5.062
-140,DPLL,,1.486
-141,Local Search,0.98,0.261
-141,Genetic,0.98,5.072
-141,DPLL,,0.0
-142,Local Search,0.98,0.269
-142,Genetic,0.98,5.159
-142,DPLL,,1.687
-143,Local Search,0.97,0.2
-143,Genetic,0.97,5.208
+139,Local Search,0.9721,0.469
+139,Genetic,0.9763,9.2008
+139,DPLL,,1.8923
+140,Local Search,0.9744,0.3633
+140,Genetic,0.9814,8.6789
+140,DPLL,,1.2769
+141,Local Search,0.9791,0.6169
+141,Genetic,0.9781,9.0149
+141,DPLL,,0.001
+142,Local Search,0.973,0.4497
+142,Genetic,0.9805,8.666
+142,DPLL,,1.4733
+143,Local Search,0.9721,0.3472
+143,Genetic,0.9763,8.2351
 143,DPLL,,0.0
-144,Local Search,0.98,0.288
-144,Genetic,0.98,5.247
-144,DPLL,,1.372
-145,Local Search,0.98,0.258
-145,Genetic,0.98,5.21
-145,DPLL,,3.283
-146,Local Search,0.98,0.249
-146,Genetic,0.98,5.192
+144,Local Search,0.9693,0.3612
+144,Genetic,0.9726,7.7859
+144,DPLL,,1.1717
+145,Local Search,0.9777,0.3812
+145,Genetic,0.9851,9.0903
+145,DPLL,,2.8552
+146,Local Search,0.9749,0.4614
+146,Genetic,0.9758,8.054
 146,DPLL,,0.0
-147,Local Search,0.98,0.301
-147,Genetic,0.99,5.077
-147,DPLL,,0.623
-148,Local Search,0.97,0.274
-148,Genetic,0.98,5.152
+147,Local Search,0.9758,0.4243
+147,Genetic,0.9893,7.3573
+147,DPLL,,0.5507
+148,Local Search,0.9716,0.4214
+148,Genetic,0.9763,7.727
 148,DPLL,,0.0
-149,Local Search,0.98,0.261
-149,Genetic,0.98,5.146
-149,DPLL,,0.565
-150,Local Search,0.98,0.27
-150,Genetic,0.98,5.396
-150,DPLL,,0.0
-151,Local Search,0.98,0.307
-151,Genetic,0.98,5.211
-151,DPLL,,3.051
-152,Local Search,0.97,0.244
-152,Genetic,0.98,5.236
-152,DPLL,,3.373
-153,Local Search,0.98,0.263
-153,Genetic,0.98,5.312
-153,DPLL,,2.619
-154,Local Search,0.97,0.254
-154,Genetic,0.98,5.385
-154,DPLL,,6.935
-155,Local Search,0.97,0.211
-155,Genetic,0.98,5.197
-155,DPLL,,3.554
-156,Local Search,0.97,0.253
-156,Genetic,0.98,5.268
-156,DPLL,,5.711
-157,Local Search,0.98,0.254
-157,Genetic,0.97,5.355
-157,DPLL,,2.356
-158,Local Search,0.97,0.25
-158,Genetic,0.98,5.292
-158,DPLL,,3.916
-159,Local Search,0.97,0.224
-159,Genetic,0.98,5.265
-159,DPLL,,4.409
-160,Local Search,0.98,0.267
-160,Genetic,0.98,5.264
-160,DPLL,,2.313
-161,Local Search,0.98,0.265
-161,Genetic,0.98,5.246
-161,DPLL,,3.44
-162,Local Search,0.97,0.288
-162,Genetic,0.97,5.197
-162,DPLL,,1.924
-163,Local Search,0.98,0.257
-163,Genetic,0.98,5.252
-163,DPLL,,3.609
-164,Local Search,0.97,0.241
-164,Genetic,0.98,5.266
-164,DPLL,,0.8
-165,Local Search,0.98,0.255
-165,Genetic,0.98,5.238
-165,DPLL,,0.0
-166,Local Search,0.98,0.31
-166,Genetic,0.98,5.217
-166,DPLL,,0.064
-167,Local Search,0.98,0.279
-167,Genetic,0.98,5.25
-167,DPLL,,0.0
-168,Local Search,0.98,0.275
-168,Genetic,0.98,5.268
-168,DPLL,,4.555
-169,Local Search,0.98,0.288
-169,Genetic,0.98,5.241
-169,DPLL,,2.856
-170,Local Search,0.97,0.253
-170,Genetic,0.98,5.221
-170,DPLL,,0.838
-171,Local Search,0.97,0.278
-171,Genetic,0.98,5.26
-171,DPLL,,0.002
-172,Local Search,0.98,0.293
-172,Genetic,0.98,5.201
-172,DPLL,,2.341
-173,Local Search,0.97,0.22
-173,Genetic,0.97,5.146
-173,DPLL,,1.289
-174,Local Search,0.97,0.26
-174,Genetic,0.98,5.241
-174,DPLL,,1.358
-175,Local Search,0.98,0.272
-175,Genetic,0.98,5.217
+149,Local Search,0.9809,0.4343
+149,Genetic,0.9819,9.175
+149,DPLL,,0.5748
+150,Local Search,0.9736,0.4225
+150,Genetic,0.9809,5.1294
+150,DPLL,,0.0005
+151,Local Search,0.9773,0.2013
+151,Genetic,0.9736,4.6384
+151,DPLL,,2.6819
+152,Local Search,0.9686,0.2199
+152,Genetic,0.9773,4.6597
+152,DPLL,,2.928
+153,Local Search,0.9741,0.2131
+153,Genetic,0.9809,4.7153
+153,DPLL,,2.2661
+154,Local Search,0.9723,0.2133
+154,Genetic,0.9786,4.6961
+154,DPLL,,5.9792
+155,Local Search,0.9695,0.2222
+155,Genetic,0.9764,4.6698
+155,DPLL,,3.001
+156,Local Search,0.9759,0.1976
+156,Genetic,0.9786,4.6463
+156,DPLL,,5.0494
+157,Local Search,0.9773,0.1823
+157,Genetic,0.9759,4.746
+157,DPLL,,2.0229
+158,Local Search,0.9723,0.2754
+158,Genetic,0.9759,4.6909
+158,DPLL,,3.4376
+159,Local Search,0.9686,0.182
+159,Genetic,0.9786,4.7443
+159,DPLL,,3.6847
+160,Local Search,0.9695,0.2461
+160,Genetic,0.9827,4.7268
+160,DPLL,,1.9885
+161,Local Search,0.9732,0.2285
+161,Genetic,0.9768,4.5479
+161,DPLL,,2.9379
+162,Local Search,0.9673,0.225
+162,Genetic,0.9714,4.68
+162,DPLL,,1.6596
+163,Local Search,0.9764,0.2413
+163,Genetic,0.9805,4.6466
+163,DPLL,,3.2851
+164,Local Search,0.9745,0.1888
+164,Genetic,0.9818,4.7123
+164,DPLL,,0.7134
+165,Local Search,0.9736,0.2378
+165,Genetic,0.9827,4.6913
+165,DPLL,,0.001
+166,Local Search,0.9786,0.2468
+166,Genetic,0.9791,4.7799
+166,DPLL,,0.055
+167,Local Search,0.9773,0.2459
+167,Genetic,0.9809,4.7298
+167,DPLL,,0.001
+168,Local Search,0.9845,0.2927
+168,Genetic,0.9777,4.5839
+168,DPLL,,4.0363
+169,Local Search,0.9736,0.2519
+169,Genetic,0.9777,4.6036
+169,DPLL,,2.4569
+170,Local Search,0.9791,0.2115
+170,Genetic,0.9795,4.4951
+170,DPLL,,0.7258
+171,Local Search,0.9759,0.2218
+171,Genetic,0.9855,4.5185
+171,DPLL,,0.001
+172,Local Search,0.9818,0.2587
+172,Genetic,0.9818,4.6201
+172,DPLL,,2.0186
+173,Local Search,0.9736,0.19
+173,Genetic,0.9759,4.6426
+173,DPLL,,1.1519
+174,Local Search,0.9727,0.2026
+174,Genetic,0.9786,4.6045
+174,DPLL,,1.1834
+175,Local Search,0.9791,0.2671
+175,Genetic,0.9832,4.6127
 175,DPLL,,0.0
-176,Local Search,0.97,0.243
-176,Genetic,0.98,5.195
-176,DPLL,,2.116
-177,Local Search,0.98,0.281
-177,Genetic,0.98,5.22
-177,DPLL,,0.002
-178,Local Search,0.97,0.252
-178,Genetic,0.98,5.194
-178,DPLL,,2.364
-179,Local Search,0.98,0.266
-179,Genetic,0.98,5.144
-179,DPLL,,0.613
-180,Local Search,0.98,0.278
-180,Genetic,0.98,5.281
-180,DPLL,,0.002
-181,Local Search,0.97,0.26
-181,Genetic,0.97,5.251
-181,DPLL,,3.867
-182,Local Search,0.98,0.25
-182,Genetic,0.98,5.194
-182,DPLL,,4.164
-183,Local Search,0.97,0.241
-183,Genetic,0.97,5.147
-183,DPLL,,0.0
-184,Local Search,0.97,0.196
-184,Genetic,0.98,5.246
-184,DPLL,,1.079
-185,Local Search,0.97,0.264
-185,Genetic,0.98,5.277
-185,DPLL,,5.745
-186,Local Search,0.97,0.228
-186,Genetic,0.98,5.246
-186,DPLL,,4.73
-187,Local Search,0.98,0.247
-187,Genetic,0.98,5.2
-187,DPLL,,0.048
-188,Local Search,0.97,0.268
-188,Genetic,0.98,5.227
+176,Local Search,0.9773,0.2184
+176,Genetic,0.9791,4.7393
+176,DPLL,,1.9081
+177,Local Search,0.9805,0.2737
+177,Genetic,0.9773,4.6634
+177,DPLL,,0.001
+178,Local Search,0.9795,0.2863
+178,Genetic,0.9727,4.6831
+178,DPLL,,2.0833
+179,Local Search,0.9786,0.2393
+179,Genetic,0.9855,4.5583
+179,DPLL,,0.5481
+180,Local Search,0.9723,0.2005
+180,Genetic,0.9773,4.5301
+180,DPLL,,0.001
+181,Local Search,0.9723,0.2504
+181,Genetic,0.9768,4.5653
+181,DPLL,,3.4597
+182,Local Search,0.9723,0.1994
+182,Genetic,0.98,4.5204
+182,DPLL,,3.8432
+183,Local Search,0.9664,0.214
+183,Genetic,0.975,4.5894
+183,DPLL,,0.001
+184,Local Search,0.9759,0.2345
+184,Genetic,0.9741,6.0425
+184,DPLL,,1.1139
+185,Local Search,0.975,0.2661
+185,Genetic,0.9786,7.6267
+185,DPLL,,6.0036
+186,Local Search,0.97,0.3526
+186,Genetic,0.98,7.9297
+186,DPLL,,4.4048
+187,Local Search,0.9727,0.3563
+187,Genetic,0.985,7.9566
+187,DPLL,,0.041
+188,Local Search,0.9777,0.4384
+188,Genetic,0.9795,5.4376
 188,DPLL,,0.001
-189,Local Search,0.97,0.226
-189,Genetic,0.98,5.248
-189,DPLL,,7.002
-190,Local Search,0.98,0.231
-190,Genetic,0.98,5.254
-190,DPLL,,3.73
-191,Local Search,0.97,0.245
-191,Genetic,0.98,5.215
-191,DPLL,,2.861
-192,Local Search,0.97,0.263
-192,Genetic,0.98,5.2
-192,DPLL,,4.164
-193,Local Search,0.97,0.257
-193,Genetic,0.97,5.976
-193,DPLL,,2.585
-194,Local Search,0.97,0.271
-194,Genetic,0.98,5.623
-194,DPLL,,2.77
-195,Local Search,0.97,0.255
-195,Genetic,0.97,5.398
-195,DPLL,,2.449
-196,Local Search,0.97,0.242
-196,Genetic,0.98,5.245
-196,DPLL,,3.63
-197,Local Search,0.97,0.251
-197,Genetic,0.98,5.279
-197,DPLL,,4.196
-198,Local Search,0.97,0.239
-198,Genetic,0.98,5.252
-198,DPLL,,3.562
-199,Local Search,0.97,0.227
-199,Genetic,0.98,5.308
-199,DPLL,,4.678
-200,Local Search,0.98,0.272
-200,Genetic,0.98,5.419
-200,DPLL,,1.817
-201,Local Search,0.97,0.27
-201,Genetic,0.98,5.431
-201,DPLL,,3.238
-202,Local Search,0.97,0.285
-202,Genetic,0.98,5.368
-202,DPLL,,5.368
-203,Local Search,0.97,0.285
-203,Genetic,0.97,5.444
-203,DPLL,,1.285
-204,Local Search,0.97,0.239
-204,Genetic,0.98,5.408
-204,DPLL,,2.048
-205,Local Search,0.98,0.277
-205,Genetic,0.98,5.338
-205,DPLL,,1.966
-206,Local Search,0.97,0.287
-206,Genetic,0.98,5.404
+189,Local Search,0.9859,0.2433
+189,Genetic,0.9773,4.8329
+189,DPLL,,6.5492
+190,Local Search,0.9773,0.2453
+190,Genetic,0.9786,4.8451
+190,DPLL,,3.4713
+191,Local Search,0.975,0.2541
+191,Genetic,0.9768,6.6743
+191,DPLL,,2.7803
+192,Local Search,0.9714,0.5423
+192,Genetic,0.9732,8.2103
+192,DPLL,,4.0498
+193,Local Search,0.9686,0.4754
+193,Genetic,0.9714,5.892
+193,DPLL,,2.4194
+194,Local Search,0.9732,0.2336
+194,Genetic,0.975,4.5879
+194,DPLL,,2.6229
+195,Local Search,0.9764,0.2218
+195,Genetic,0.98,4.5773
+195,DPLL,,2.3586
+196,Local Search,0.9709,0.2273
+196,Genetic,0.9736,4.5235
+196,DPLL,,3.6871
+197,Local Search,0.9732,0.2108
+197,Genetic,0.9764,4.5756
+197,DPLL,,4.1791
+198,Local Search,0.9768,0.2309
+198,Genetic,0.98,4.6922
+198,DPLL,,3.3725
+199,Local Search,0.975,0.2655
+199,Genetic,0.9777,4.6105
+199,DPLL,,4.7431
+200,Local Search,0.9707,0.2127
+200,Genetic,0.9791,4.759
+200,DPLL,,1.7125
+201,Local Search,0.9707,0.2374
+201,Genetic,0.9733,4.6814
+201,DPLL,,2.8989
+202,Local Search,0.9738,0.2404
+202,Genetic,0.9809,4.7624
+202,DPLL,,5.228
+203,Local Search,0.9702,0.2579
+203,Genetic,0.9702,4.7757
+203,DPLL,,1.3253
+204,Local Search,0.9742,0.2344
+204,Genetic,0.9742,4.8814
+204,DPLL,,2.1972
+205,Local Search,0.9809,0.3683
+205,Genetic,0.9804,8.6119
+205,DPLL,,2.0923
+206,Local Search,0.9751,0.367
+206,Genetic,0.9773,7.4142
 206,DPLL,,0.0
-207,Local Search,0.98,0.289
-207,Genetic,0.97,5.421
-207,DPLL,,4.683
-208,Local Search,0.97,0.238
-208,Genetic,0.97,5.384
-208,DPLL,,1.793
-209,Local Search,0.97,0.253
-209,Genetic,0.97,5.321
-209,DPLL,,3.397
-210,Local Search,0.98,0.293
-210,Genetic,0.98,5.389
-210,DPLL,,2.206
-211,Local Search,0.97,0.271
-211,Genetic,0.97,5.4
-211,DPLL,,4.028
-212,Local Search,0.98,0.275
-212,Genetic,0.98,5.404
-212,DPLL,,4.435
-213,Local Search,0.98,0.256
-213,Genetic,0.98,5.37
-213,DPLL,,2.824
-214,Local Search,0.98,0.257
-214,Genetic,0.98,5.385
-214,DPLL,,5.879
-215,Local Search,0.97,0.258
-215,Genetic,0.97,5.356
-215,DPLL,,2.897
-216,Local Search,0.98,0.282
-216,Genetic,0.98,5.402
-216,DPLL,,2.105
-217,Local Search,0.98,0.284
-217,Genetic,0.98,5.394
-217,DPLL,,0.002
-218,Local Search,0.97,0.226
-218,Genetic,0.98,5.342
-218,DPLL,,4.075
-219,Local Search,0.97,0.302
-219,Genetic,0.97,5.392
-219,DPLL,,3.507
-220,Local Search,0.97,0.262
-220,Genetic,0.98,5.413
-220,DPLL,,1.012
-221,Local Search,0.98,0.285
-221,Genetic,0.97,5.489
-221,DPLL,,3.001
-222,Local Search,0.97,0.271
-222,Genetic,0.98,5.514
-222,DPLL,,2.986
-223,Local Search,0.98,0.265
-223,Genetic,0.98,5.477
-223,DPLL,,2.053
-224,Local Search,0.97,0.256
-224,Genetic,0.97,5.478
-224,DPLL,,2.703
-225,Local Search,0.97,0.245
-225,Genetic,0.97,5.395
-225,DPLL,,4.371
-226,Local Search,0.97,0.226
-226,Genetic,0.97,5.447
-226,DPLL,,4.229
-227,Local Search,0.98,0.291
-227,Genetic,0.97,5.445
-227,DPLL,,2.61
-228,Local Search,0.97,0.251
-228,Genetic,0.98,5.425
-228,DPLL,,2.875
-229,Local Search,0.98,0.281
-229,Genetic,0.98,5.447
-229,DPLL,,2.728
-230,Local Search,0.97,0.227
-230,Genetic,0.98,5.407
-230,DPLL,,1.736
-231,Local Search,0.97,0.239
-231,Genetic,0.97,5.378
-231,DPLL,,3.54
-232,Local Search,0.97,0.233
-232,Genetic,0.98,5.352
-232,DPLL,,1.318
-233,Local Search,0.98,0.28
-233,Genetic,0.98,5.322
-233,DPLL,,1.446
-234,Local Search,0.97,0.217
-234,Genetic,0.98,5.265
-234,DPLL,,2.952
-235,Local Search,0.97,0.232
-235,Genetic,0.98,5.266
-235,DPLL,,2.626
-236,Local Search,0.97,0.274
-236,Genetic,0.97,5.316
-236,DPLL,,4.302
-237,Local Search,0.98,0.283
-237,Genetic,0.98,5.227
-237,DPLL,,0.478
-238,Local Search,0.97,0.309
-238,Genetic,0.98,5.251
-238,DPLL,,0.0
-239,Local Search,0.97,0.269
-239,Genetic,0.98,5.294
-239,DPLL,,3.329
-240,Local Search,0.98,0.261
-240,Genetic,0.98,5.353
-240,DPLL,,1.579
-241,Local Search,0.97,0.275
-241,Genetic,0.98,5.262
-241,DPLL,,2.778
-242,Local Search,0.98,0.273
-242,Genetic,0.99,5.25
-242,DPLL,,2.476
-243,Local Search,0.97,0.237
-243,Genetic,0.98,5.193
+207,Local Search,0.9756,0.3226
+207,Genetic,0.9764,8.2166
+207,DPLL,,4.4051
+208,Local Search,0.9742,0.3923
+208,Genetic,0.9778,8.8629
+208,DPLL,,1.7233
+209,Local Search,0.9791,0.5862
+209,Genetic,0.9787,10.017
+209,DPLL,,3.1615
+210,Local Search,0.9658,0.3719
+210,Genetic,0.976,7.3733
+210,DPLL,,1.8909
+211,Local Search,0.9702,0.2959
+211,Genetic,0.9764,6.934
+211,DPLL,,3.7772
+212,Local Search,0.9764,0.2332
+212,Genetic,0.9809,4.7208
+212,DPLL,,4.3817
+213,Local Search,0.976,0.3186
+213,Genetic,0.9751,8.2178
+213,DPLL,,2.7906
+214,Local Search,0.9707,0.34
+214,Genetic,0.9787,10.6444
+214,DPLL,,5.6334
+215,Local Search,0.9729,0.3499
+215,Genetic,0.9764,6.8932
+215,DPLL,,2.5925
+216,Local Search,0.9764,0.3176
+216,Genetic,0.9756,6.3518
+216,DPLL,,1.9352
+217,Local Search,0.9782,0.3265
+217,Genetic,0.98,6.8875
+217,DPLL,,0.0002
+218,Local Search,0.9751,0.3372
+218,Genetic,0.9773,7.0726
+218,DPLL,,3.859
+219,Local Search,0.9769,0.6695
+219,Genetic,0.9742,9.4113
+219,DPLL,,3.1339
+220,Local Search,0.9716,0.26
+220,Genetic,0.9769,5.7934
+220,DPLL,,0.94
+221,Local Search,0.9724,0.2676
+221,Genetic,0.9769,5.6592
+221,DPLL,,2.621
+222,Local Search,0.9698,0.2605
+222,Genetic,0.9769,6.3838
+222,DPLL,,2.7182
+223,Local Search,0.9662,0.3445
+223,Genetic,0.9773,6.6498
+223,DPLL,,1.9129
+224,Local Search,0.9684,0.2826
+224,Genetic,0.9729,6.4637
+224,DPLL,,2.6198
+225,Local Search,0.9662,0.2752
+225,Genetic,0.9769,7.0777
+225,DPLL,,4.3443
+226,Local Search,0.9711,0.3319
+226,Genetic,0.9764,6.2481
+226,DPLL,,4.4013
+227,Local Search,0.9747,0.2308
+227,Genetic,0.9778,4.6583
+227,DPLL,,2.4611
+228,Local Search,0.9724,0.2253
+228,Genetic,0.9773,4.6987
+228,DPLL,,2.5228
+229,Local Search,0.972,0.2499
+229,Genetic,0.9769,4.6342
+229,DPLL,,2.5447
+230,Local Search,0.9689,0.218
+230,Genetic,0.9747,4.7028
+230,DPLL,,1.4312
+231,Local Search,0.968,0.1999
+231,Genetic,0.9733,4.7476
+231,DPLL,,3.1529
+232,Local Search,0.9733,0.2056
+232,Genetic,0.9791,4.6929
+232,DPLL,,1.2229
+233,Local Search,0.9782,0.2274
+233,Genetic,0.9773,4.7834
+233,DPLL,,1.2627
+234,Local Search,0.9733,0.2544
+234,Genetic,0.9742,4.8685
+234,DPLL,,2.7869
+235,Local Search,0.9764,0.2341
+235,Genetic,0.9831,4.6161
+235,DPLL,,2.659
+236,Local Search,0.9729,0.1858
+236,Genetic,0.9733,4.619
+236,DPLL,,4.0547
+237,Local Search,0.9711,0.2133
+237,Genetic,0.9818,4.7308
+237,DPLL,,0.4352
+238,Local Search,0.9698,0.2058
+238,Genetic,0.9773,4.6826
+238,DPLL,,0.0011
+239,Local Search,0.9787,0.2258
+239,Genetic,0.976,4.6802
+239,DPLL,,2.8469
+240,Local Search,0.9729,0.2222
+240,Genetic,0.9747,4.6938
+240,DPLL,,1.3203
+241,Local Search,0.9747,0.2508
+241,Genetic,0.9809,4.7121
+241,DPLL,,2.4516
+242,Local Search,0.9782,0.2317
+242,Genetic,0.9836,4.7873
+242,DPLL,,2.245
+243,Local Search,0.9724,0.2157
+243,Genetic,0.9796,4.9163
 243,DPLL,,0.0
-244,Local Search,0.97,0.227
-244,Genetic,0.98,5.221
-244,DPLL,,1.604
-245,Local Search,0.97,0.248
-245,Genetic,0.98,5.227
-245,DPLL,,3.409
-246,Local Search,0.98,0.246
-246,Genetic,0.98,5.236
-246,DPLL,,1.918
-247,Local Search,0.97,0.248
-247,Genetic,0.98,5.26
-247,DPLL,,1.48
-248,Local Search,0.98,0.314
-248,Genetic,0.98,5.207
-248,DPLL,,1.852
-249,Local Search,0.98,0.257
-249,Genetic,0.98,5.292
+244,Local Search,0.9751,0.2455
+244,Genetic,0.9773,4.9251
+244,DPLL,,1.4426
+245,Local Search,0.9738,0.214
+245,Genetic,0.98,4.9073
+245,DPLL,,2.9186
+246,Local Search,0.9787,0.2485
+246,Genetic,0.98,4.8632
+246,DPLL,,1.7074
+247,Local Search,0.9716,0.2556
+247,Genetic,0.9747,4.8539
+247,DPLL,,1.223
+248,Local Search,0.9747,0.261
+248,Genetic,0.9804,4.844
+248,DPLL,,1.6498
+249,Local Search,0.9782,0.2519
+249,Genetic,0.9818,4.8827
 249,DPLL,,0.0
-250,Local Search,0.98,0.297
-250,Genetic,0.98,5.378
-250,DPLL,,0.459
-251,Local Search,0.97,0.26
-251,Genetic,0.98,5.301
-251,DPLL,,0.002
-252,Local Search,0.97,0.238
-252,Genetic,0.98,5.313
-252,DPLL,,2.216
-253,Local Search,0.98,0.295
-253,Genetic,0.98,5.315
-253,DPLL,,2.423
-254,Local Search,0.97,0.255
-254,Genetic,0.98,5.376
-254,DPLL,,1.913
-255,Local Search,0.97,0.287
-255,Genetic,0.98,5.375
-255,DPLL,,1.757
-256,Local Search,0.98,0.274
-256,Genetic,0.98,5.428
-256,DPLL,,1.775
-257,Local Search,0.97,0.292
-257,Genetic,0.98,5.425
+250,Local Search,0.9813,0.306
+250,Genetic,0.9787,5.0516
+250,DPLL,,0.4144
+251,Local Search,0.977,0.2995
+251,Genetic,0.9826,5.0581
+251,DPLL,,0.0009
+252,Local Search,0.9726,0.2546
+252,Genetic,0.9826,4.8962
+252,DPLL,,1.9365
+253,Local Search,0.9683,0.1946
+253,Genetic,0.9783,4.8971
+253,DPLL,,2.091
+254,Local Search,0.973,0.2075
+254,Genetic,0.977,4.8603
+254,DPLL,,1.6974
+255,Local Search,0.9657,0.2217
+255,Genetic,0.9752,4.8521
+255,DPLL,,1.4937
+256,Local Search,0.9726,0.289
+256,Genetic,0.9822,4.8448
+256,DPLL,,1.5588
+257,Local Search,0.9765,0.283
+257,Genetic,0.9739,4.8434
 257,DPLL,,0.0
-258,Local Search,0.97,0.278
-258,Genetic,0.98,5.34
-258,DPLL,,2.398
-259,Local Search,0.97,0.248
-259,Genetic,0.98,5.347
-259,DPLL,,1.928
-260,Local Search,0.98,0.235
-260,Genetic,0.98,5.316
-260,DPLL,,1.836
-261,Local Search,0.97,0.263
-261,Genetic,0.98,5.331
-261,DPLL,,0.001
-262,Local Search,0.97,0.301
-262,Genetic,0.98,5.325
-262,DPLL,,2.258
-263,Local Search,0.98,0.273
-263,Genetic,0.98,5.345
-263,DPLL,,2.394
-264,Local Search,0.97,0.255
-264,Genetic,0.98,5.411
-264,DPLL,,0.0
-265,Local Search,0.96,0.221
-265,Genetic,0.98,5.371
-265,DPLL,,1.76
-266,Local Search,0.97,0.262
-266,Genetic,0.98,5.391
-266,DPLL,,3.303
-267,Local Search,0.97,0.26
-267,Genetic,0.98,5.333
-267,DPLL,,4.66
-268,Local Search,0.98,0.32
-268,Genetic,0.98,5.305
-268,DPLL,,2.052
-269,Local Search,0.97,0.218
-269,Genetic,0.98,5.35
-269,DPLL,,2.168
-270,Local Search,0.97,0.28
-270,Genetic,0.97,5.387
-270,DPLL,,3.07
-271,Local Search,0.97,0.224
-271,Genetic,0.98,5.469
-271,DPLL,,2.662
-272,Local Search,0.97,0.254
-272,Genetic,0.98,5.472
-272,DPLL,,4.363
-273,Local Search,0.97,0.275
-273,Genetic,0.98,5.445
-273,DPLL,,2.918
-274,Local Search,0.97,0.252
-274,Genetic,0.97,5.44
-274,DPLL,,0.803
-275,Local Search,0.98,0.252
-275,Genetic,0.98,5.425
+258,Local Search,0.9709,0.2359
+258,Genetic,0.9765,4.8775
+258,DPLL,,2.0261
+259,Local Search,0.9739,0.2314
+259,Genetic,0.9739,4.8529
+259,DPLL,,1.659
+260,Local Search,0.9778,0.2255
+260,Genetic,0.9817,5.0246
+260,DPLL,,1.6014
+261,Local Search,0.9696,0.2501
+261,Genetic,0.9748,4.971
+261,DPLL,,0.0
+262,Local Search,0.9739,0.2361
+262,Genetic,0.98,4.9035
+262,DPLL,,1.9754
+263,Local Search,0.9726,0.2614
+263,Genetic,0.9813,4.7091
+263,DPLL,,1.9988
+264,Local Search,0.9704,0.2744
+264,Genetic,0.9735,4.68
+264,DPLL,,0.001
+265,Local Search,0.9726,0.2544
+265,Genetic,0.9761,4.7701
+265,DPLL,,1.4989
+266,Local Search,0.9674,0.2218
+266,Genetic,0.9752,6.0299
+266,DPLL,,2.9944
+267,Local Search,0.9778,0.3513
+267,Genetic,0.9778,8.0043
+267,DPLL,,3.8954
+268,Local Search,0.9761,0.3818
+268,Genetic,0.9839,8.5896
+268,DPLL,,1.7671
+269,Local Search,0.9739,0.481
+269,Genetic,0.9743,10.7331
+269,DPLL,,1.8569
+270,Local Search,0.9722,0.2369
+270,Genetic,0.9709,4.7014
+270,DPLL,,2.754
+271,Local Search,0.9765,0.2531
+271,Genetic,0.9761,4.7163
+271,DPLL,,2.3484
+272,Local Search,0.973,0.2587
+272,Genetic,0.9739,4.8509
+272,DPLL,,3.8211
+273,Local Search,0.9717,0.2424
+273,Genetic,0.9835,4.7299
+273,DPLL,,2.565
+274,Local Search,0.9791,0.2271
+274,Genetic,0.9739,4.6669
+274,DPLL,,0.6748
+275,Local Search,0.9783,0.2156
+275,Genetic,0.98,5.0955
 275,DPLL,,0.0
-276,Local Search,0.97,0.28
-276,Genetic,0.98,5.511
-276,DPLL,,3.398
-277,Local Search,0.98,0.255
-277,Genetic,0.98,5.642
-277,DPLL,,0.212
-278,Local Search,0.97,0.288
-278,Genetic,0.98,5.438
+276,Local Search,0.9735,0.376
+276,Genetic,0.977,7.8147
+276,DPLL,,3.029
+277,Local Search,0.9761,0.4936
+277,Genetic,0.9843,7.6663
+277,DPLL,,0.1987
+278,Local Search,0.9687,0.7286
+278,Genetic,0.9752,9.715
 278,DPLL,,0.0
-279,Local Search,0.97,0.271
-279,Genetic,0.98,5.511
-279,DPLL,,0.474
-280,Local Search,0.98,0.257
-280,Genetic,0.98,5.49
+279,Local Search,0.9774,0.4125
+279,Genetic,0.9809,6.6947
+279,DPLL,,0.4437
+280,Local Search,0.9787,0.3469
+280,Genetic,0.9817,7.4867
 280,DPLL,,0.0
-281,Local Search,0.97,0.272
-281,Genetic,0.97,5.502
-281,DPLL,,4.359
-282,Local Search,0.97,0.265
-282,Genetic,0.98,5.616
-282,DPLL,,3.437
-283,Local Search,0.98,0.27
-283,Genetic,0.97,5.514
-283,DPLL,,2.103
-284,Local Search,0.97,0.213
-284,Genetic,0.98,5.502
-284,DPLL,,5.165
-285,Local Search,0.98,0.304
-285,Genetic,0.98,5.543
-285,DPLL,,3.302
-286,Local Search,0.97,0.251
-286,Genetic,0.98,5.564
-286,DPLL,,3.343
-287,Local Search,0.97,0.282
-287,Genetic,0.97,5.537
-287,DPLL,,4.341
-288,Local Search,0.98,0.294
-288,Genetic,0.98,5.493
-288,DPLL,,1.365
-289,Local Search,0.98,0.291
-289,Genetic,0.98,5.539
-289,DPLL,,2.392
-290,Local Search,0.98,0.299
-290,Genetic,0.98,5.459
-290,DPLL,,4.568
-291,Local Search,0.97,0.266
-291,Genetic,0.98,5.48
-291,DPLL,,5.497
-292,Local Search,0.97,0.282
-292,Genetic,0.98,5.517
-292,DPLL,,3.444
-293,Local Search,0.98,0.294
-293,Genetic,0.97,5.463
-293,DPLL,,3.573
-294,Local Search,0.97,0.293
-294,Genetic,0.98,5.473
-294,DPLL,,0.0
-295,Local Search,0.98,0.268
-295,Genetic,0.98,5.44
-295,DPLL,,0.882
-296,Local Search,0.97,0.272
-296,Genetic,0.98,5.341
-296,DPLL,,0.0
-297,Local Search,0.97,0.281
-297,Genetic,0.97,5.331
-297,DPLL,,7.823
-298,Local Search,0.97,0.222
-298,Genetic,0.98,5.348
-298,DPLL,,1.017
-299,Local Search,0.97,0.286
-299,Genetic,0.97,5.319
+281,Local Search,0.9713,0.3468
+281,Genetic,0.9748,7.1863
+281,DPLL,,3.8888
+282,Local Search,0.9739,0.4328
+282,Genetic,0.9757,7.6619
+282,DPLL,,2.9523
+283,Local Search,0.9748,0.3866
+283,Genetic,0.98,7.4614
+283,DPLL,,2.0234
+284,Local Search,0.9713,0.3998
+284,Genetic,0.9787,8.4374
+284,DPLL,,4.7515
+285,Local Search,0.973,0.7064
+285,Genetic,0.9804,10.8444
+285,DPLL,,2.8254
+286,Local Search,0.9739,0.3352
+286,Genetic,0.9813,7.5859
+286,DPLL,,2.9072
+287,Local Search,0.9722,0.3245
+287,Genetic,0.9765,6.9319
+287,DPLL,,4.0401
+288,Local Search,0.9696,0.3867
+288,Genetic,0.9761,8.2626
+288,DPLL,,1.219
+289,Local Search,0.9765,0.5404
+289,Genetic,0.9765,9.5053
+289,DPLL,,2.0833
+290,Local Search,0.97,0.5151
+290,Genetic,0.9796,7.0423
+290,DPLL,,4.663
+291,Local Search,0.9687,0.3422
+291,Genetic,0.9713,6.6177
+291,DPLL,,4.9141
+292,Local Search,0.9757,0.3116
+292,Genetic,0.9722,6.918
+292,DPLL,,3.3082
+293,Local Search,0.9748,0.3308
+293,Genetic,0.9813,7.2297
+293,DPLL,,3.2112
+294,Local Search,0.9774,0.3021
+294,Genetic,0.9817,7.5159
+294,DPLL,,0.0018
+295,Local Search,0.9743,0.3148
+295,Genetic,0.9783,8.4717
+295,DPLL,,0.8618
+296,Local Search,0.9674,0.4114
+296,Genetic,0.9791,9.5527
+296,DPLL,,0.0003
+297,Local Search,0.9752,0.602
+297,Genetic,0.9735,5.3327
+297,DPLL,,7.0369
+298,Local Search,0.9696,0.2368
+298,Genetic,0.9757,4.7341
+298,DPLL,,0.9043
+299,Local Search,0.9752,0.2896
+299,Genetic,0.9735,4.7721
 299,DPLL,,0.0

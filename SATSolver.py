@@ -202,8 +202,8 @@ def main():
 
     # create DataFrame and save to CSV
     df = pd.DataFrame(rows, columns=["Formula", "Algorithm", "Clauses Prop", "Time"])
-    df["Clauses Prop"] = df["Clauses Prop"].round(2)
-    df["Time"] = df["Time"].round(3)
+    df["Clauses Prop"] = df["Clauses Prop"].round(4)
+    df["Time"] = df["Time"].round(4)
     df.to_csv("results_by_formula.csv", index=False)
 
     print("Saved results_by_formula.csv with", len(df), "rows.")
