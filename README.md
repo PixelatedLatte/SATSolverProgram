@@ -29,3 +29,7 @@ This program implements three heuristic search techniques to solve the Boolean S
    It is currently limited to one run of the Genetic Algorithm and Local Search for time sake, but you can modify the
    for loops range if you want to run it multiple times. DPLL does not have randomness, so additional runs of the code
    yields the same results
+
+## Slight notes for Rmd file
+You can run the Rmd file in RStudio or something similar to print out the graphs and tables from the Runtime.csv file generated from original output
+of the program.
