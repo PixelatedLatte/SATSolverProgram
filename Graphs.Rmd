@@ -1,0 +1,52 @@
+---
+title: "Graphs"
+output: html_document
+---
+
+```{r imports}
+  install.packages("ggplot2")
+  install.packages("dplyr")
+  library(ggplot2)
+  library(dplyr)
+  
+  dataclauses <- read.csv("results_by_formula.csv")
+  dataruntime <- read.csv("Runtime.csv")
+
+```
+
+```{r graphdata}
+
+  dataclauses <- dataclauses %>%
+  mutate(Clauses = case_when(
+    Formula > -1 & Formula < 50 ~ "410",
+    Formula > 49 & Formula < 100 ~ "420",
+    Formula > 99 & Formula < 150 ~ "430",
+    Formula > 149 & Formula < 200 ~ "440",
+    Formula > 199 & Formula < 250 ~ "450",
+    Formula > 249 & Formula < 300 ~ "460"
+  ))
+
+    dataruntime <- dataruntime %>%
+  mutate(Clauses = case_when(
+    Formula > -1 & Formula < 50 ~ "410",
+    Formula > 49 & Formula < 100 ~ "420",
+    Formula > 99 & Formula < 150 ~ "430",
+    Formula > 149 & Formula < 200 ~ "440",
+    Formula > 199 & Formula < 250 ~ "450",
+    Formula > 249 & Formula < 300 ~ "460"
+  ))
+
+  
+  datasatisfied <- dataclauses %>% na.omit() %>% arrange(Clauses)
+  datatime <- dataruntime %>% arrange(Clauses)
+  
+  datasatisfied %>% ggplot(aes(x = Formula, y = Clauses.Prop, col = Algorithm, shape = Clauses)) + geom_point() + labs(title = "Average proportion of clauses satisfied by algorithm and formula", subtitle = "Sorted by number of clauses", x = "Formula", y = "Average prop. of clauses satisfied after 10 runs", caption = "Data collected by groups code")
+  
+  datatime %>% ggplot(aes(x = Formula, y = Time, col = Algorithm, shape = Clauses)) + geom_point() + labs(title = "Average runtime of algorithm by formula", subtitle = "Sorted by number of clauses", x = "Formula", y = "Average runtime of formula after 10 runs (seconds)", caption = "DPLL is only ran once, data collected by groups code" )
+
+  
+  
+```
+
+
+
