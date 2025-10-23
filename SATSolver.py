@@ -4,12 +4,8 @@ Description: A simple SAT solver using the DPLL algorithm, and more
 import copy
 import glob
 import os
-import random
 import time
-import csv
 import pandas as pd
-from re import A
-from stringprep import in_table_a1
 from SATClass import *
 import SATClass
 
@@ -120,7 +116,6 @@ def main():
         endTime = time.time()
         print(f"Time to solve {formula.fileN} using DPLL: {endTime - startTime} seconds\n")
         dpllTimes.append(endTime-startTime)
-
     # Genetic alg initializers
     population_size = 100
     generations = 150
@@ -136,7 +131,7 @@ def main():
     AverageTimeLocal = []
     AverageClausesGenetic = []
     AverageTimeGenetic = []
-    for i in range(0,5):
+    for i in range(0,1):
         ProportionClausesLocal = []
         ProportionClausesGenetic = []
         TotalTimesLocal = []
@@ -150,21 +145,22 @@ def main():
             TotalTimesLocal.append(LocalSearchTime)
 
             localBestCount = ClausesSatisfied(formula, LocalSearchBest)
-            print(f"Proportion of clauses satisfied by Local Search on {formula.fileN}: {localBestCount/formula.numClauses:.2f}\n")
+            print(f"Proportion of clauses satisfied by Local Search on {formula.fileN}: {localBestCount/formula.numClauses:.2f}")
             ProportionClausesLocal.append(localBestCount/formula.numClauses)
+
+            print(f"Local Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}\n")
 
             startTime = time.time()
             GeneticAlgBest = SATClass.GeneticAlgorithm(formula, population_size, generations, mutation_proportion, crossover_amount)
             endTime = time.time()
             GeneticAlgTime = endTime - startTime
-            print(f"Time taken for Genetic Algorithm on {formula.fileN}: {GeneticAlgTime:.3f} seconds\n")
+            print(f"Time taken for Genetic Algorithm on {formula.fileN}: {GeneticAlgTime:.3f} seconds")
             TotalTimesGenetic.append(GeneticAlgTime)
 
             geneticBestCount = ClausesSatisfied(formula, GeneticAlgBest)
-            print(f"Proportion of clauses satisfied by Genetic Algorithm on {formula.fileN}: {geneticBestCount/formula.numClauses:.2f}\n")
+            print(f"Proportion of clauses satisfied by Genetic Algorithm on {formula.fileN}: {geneticBestCount/formula.numClauses:.2f}")
             ProportionClausesGenetic.append(geneticBestCount/formula.numClauses)
 
-            print(f"\nLocal Search Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, LocalSearchBest)}/{formula.numClauses}\n")
             print(f"Genetic Algorithm Best Assignment for {formula.fileN}: {SATClass.ClausesSatisfied(formula, GeneticAlgBest)}/{formula.numClauses}\n")
             FormulasCompleted.append(formula.fileN)
             ClausesSatisfiedLocalSearchList.append(SATClass.ClausesSatisfied(formula, LocalSearchBest))

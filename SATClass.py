@@ -5,8 +5,6 @@ import copy
 import glob
 import os
 import random
-from re import A, S
-from stringprep import in_table_a1
 #from sympy import *
 '''
     File Class:

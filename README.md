@@ -12,12 +12,20 @@ This program implements three heuristic search techniques to solve the Boolean S
 
 ## How to Run
 1. Ensure you have Python installed on your machine.
-2. Make sure all CNF Formula Folders are in the folder you run the program from. 
+2. Install pandas library if you don't have it already:
+   ```
+   pip install pandas
+   ```
+3. Make sure all CNF Formula Folders are in the folder you run the program from,HARD CNF Formulas is the important one. 
 	(Should have 2, "CNF Formulas" and "HARD CNF Formulas")
-3. No requirements to install, you can just run SATSolver.py
+4. No requirements to install, you can just run SATSolver.py
 																			
 	Run the program using the command:
 		```
 	    python SATSolver.py
 		```
     or run in an IDE of your choice.
+5. Feel free to run the program multiple times to see different results for the Genetic Algorithm and Local Search
+   It is currently limited to one run of the Genetic Algorithm and Local Search for time sake, but you can modify the
+   for loops range if you want to run it multiple times. DPLL does not have randomness, so additional runs of the code
+   yields the same results
